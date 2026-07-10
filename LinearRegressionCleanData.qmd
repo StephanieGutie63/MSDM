@@ -1,0 +1,264 @@
+---
+title: "Predictive Analysis"
+format: html
+editor: visual
+---
+
+## Predictive Analysis
+
+```{r}
+#| message: false
+#| warning: false
+library(haven)
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(lubridate)
+```
+
+```{r}
+msdm_data <- read.csv("msdm_cleandata.csv")
+head(msdm_data)
+#view(msdm_data)
+#str(msdm_data)
+```
+
+```{r}
+#Clean Variable Names
+SurveyData <- clean_names(msdm_data) |>  #clean SurveyData names
+              clean_names(case= "upper_camel") #clean up using upper_camel
+
+head(SurveyData) #check to see changes made to SurveyData
+
+#change startdate to Date
+SurveyData$RecordedDate <- as.Date(SurveyData$RecordedDate,
+  format = "%m/%d/%Y %H:%M:%S")
+
+str(SurveyData$RecordedDate)
+head(SurveyData)
+```
+
+```{r}
+#| message: false
+#| warning: false
+#change variable names
+CleanSurveyData <- SurveyData |>
+  rename(
+    PracticeYogaInterest = Question1,
+    YogaExperience = Question2,
+    YogaActivityGroup= Question3_1,
+    YogaActivityPrivate= Question3_2,
+    YogaActivityOnline= Question3_3,
+    YogaActivityPreRec= Question3_4,
+    YogaActivityBook= Question3_5,
+    YogaActivityFriend= Question3_6,
+    YogaActivitySelfTaught= Question3_7,
+    YogaActivityOther= Question3_8,
+    YogaActivitiesOtherText = Question3_8Text,
+    YogaFrequency = Question4,
+    YogaContent = Question5_1,
+    YogaLifestyle = Question5_2,
+    YogaInfoSeeking = Question5_3,
+    PrefVideoShorts = Question6_1,
+    PrefVideoShortVideo = Question6_2,
+    PrefVideoMedium = Question6_3,
+    PrefVideoFulllength = Question6_4,
+    BegFlowInterest = Question7_1,
+    StressReliefInterest = Question7_2,
+    TradChineseInterest = Question7_3,
+    BreathworkInterest = Question7_4,
+    FullLengthInterest = Question7_5,
+    MonthProgramInterest = Question7_6,
+    ShortDailyInterest = Question7_7,
+    MemberInterest = Question8,
+    WillingnessToPay = Question9,
+    WillingnessToPayText = Question9_5Text,
+    VisitLikelihood = Question10,
+    YoutubeSocial = Question11_1,
+    InstagramSocial = Question11_2,
+    TIkTokSocial = Question11_3,
+    FacebookSocial= Question11_4,
+    PinterestSocial = Question11_5,
+    AgeGroup = Question12,
+    Gender = Question13,
+    IncomeBracket = Question14,
+    EnglishLang = Question15_1,
+    MandarinLang = Question15_2,
+    CantoneseLang = Question15_3,
+    SpanishLang= Question15_4,
+    OtherLang = Question15_5,
+    OtherLangeText = Question15_5Text,
+    Country = Question16,
+    SearchInterest = Question17
+  )
+
+head(CleanSurveyData)
+```
+
+```{r}
+#Clean Data
+#recode any values not recoded on SPSS and Qualtrics
+CleanSurveyData$MemberInterest <-
+  recode(
+    CleanSurveyData$MemberInterest,
+    `27` = 1,
+    `28` = 2,
+    `29` = 3
+  )
+
+#Clean country to categorical
+CleanSurveyData$Country <-
+  factor(
+    CleanSurveyData$Country,
+    levels = c(31,185,187),
+    labels = c("China","Taiwan","United States")
+  )
+
+#clean gender 
+CleanSurveyData$Gender <- as.factor(CleanSurveyData$Gender)
+
+
+#join text and regular wtp
+CleanSurveyDataJoin<- CleanSurveyData |>
+  mutate(
+    WillingnessToPayText= as.numeric(WillingnessToPayText),
+    WtpDollars= coalesce(WtpDollars, WillingnessToPayText)
+  )
+
+head(CleanSurveyDataJoin$WtpDollars,20)
+```
+
+```{r}
+library(corrplot)
+#PairWise Correlation of Continuous Variables
+#new Data Set to keep everything numeric
+str(CleanSurveyData)
+DataForCorAnalysisAll = CleanSurveyDataJoin |>
+                       select(where(is.numeric))
+CorMatrixAll = cor(DataForCorAnalysisAll, use= "pairwise.complete.obs")
+
+corrplot(CorMatrixAll, method = 'shade', addCoef.col = 'black', type = 'full', number.cex = 0.6, order = 'original', diag= FALSE)
+```
+
+```{r}
+#Narrow Down Correlation Matrix
+DataForCorAnalysis = CleanSurveyDataJoin |>
+                     select(YogaExperience, WillingnessToPay,SearchInterest,YogaContent,MandarinLang, VisitLikelihood, WtpDollars,MemberInterest, YogaFrequency, PrefVideoShorts)
+
+CorMatrix = cor(DataForCorAnalysis, use= "pairwise.complete.obs")
+corrplot(CorMatrix, method = 'shade', addCoef.col = 'black', type = 'full', number.cex = 0.6, order = 'original', diag= FALSE)
+```
+
+```{r}
+#membership interest of people who answered all 4 survey questions
+#model_data <- CleanSurveyData|> #new data to use for predicitive analysis
+#  select(MembershipInterest,AgeGroup,Gender, YogaExperience) |> #filtering 4 survey #questions
+#str(model_data) #shows 50 obs of 4 variables
+```
+
+```{r}
+#Linear Regression 1
+#| message: false
+#| warning: false
+#Linear Regresssion
+set.seed(123)
+#library(tidymodels)
+library(rio)
+
+ModelSurvey= lm(WtpDollars ~ YogaFrequency, CleanSurveyDataJoin)
+
+summary(ModelSurvey)
+#shows r-squared 0. 
+#adjusted r-squared 0.125
+#significant overall 0.0479<5%
+#membershipinterest = 0.018
+#if age stays the same but membeship interest increases the willingess to pay increases by 0.48cents
+#people who are intersted in the membership will be wiling to pay more
+#focus on membeship content
+
+```
+
+```{r}
+#Linear Regresssion 2
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey2= lm(WtpDollars ~ VisitLikelihood, CleanSurveyDataJoin)
+
+summary(ModelSurvey2)
+```
+
+```{r}
+#Linear Regresssion 3
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey3= lm(WtpDollars ~ VisitLikelihood+YogaFrequency, CleanSurveyDataJoin)
+
+summary(ModelSurvey3)
+```
+
+```{r}
+#Linear Regresssion 4
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey4= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang, CleanSurveyDataJoin)
+
+summary(ModelSurvey4)
+```
+
+```{r}
+#Linear Regresssion 5
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey5= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Country, CleanSurveyDataJoin)
+
+summary(ModelSurvey5)
+```
+
+```{r}
+#Linear Regresssion 5
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+PracticeYogaInterest, CleanSurveyDataJoin)
+
+summary(ModelSurvey6)
+```
+
+```{r}
+#Linear Regresssion 5
+#| message: false
+#| warning: false
+set.seed(123)
+ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+PracticeYogaInterest+YoutubeSocial, CleanSurveyDataJoin)
+
+summary(ModelSurvey6)
+```
+
+```{r}
+#Random Forest Predictor Failed because of Sample Size
+#remove NA respondents
+set.seed(123)
+library(randomForest)
+
+model_data <- CleanSurveyDataJoin|> #new data to use for predicitive analysis
+                 select(WtpDollars,YogaFrequency,AgeGroup,Gender, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) |>
+                 na.omit()
+
+
+rf <- randomForest(
+  WtpDollars ~ .,
+  data = model_data,
+  importance = TRUE
+)
+
+varImpPlot(rf)
+print(rf)
+```
+
+Left Panel: shows error increases when variable is shuffled randomly, higher value means variable is more important, negatiive means varible is not helping the model and may make noise
+
+Right Panel: How much each variable improves the decision trees by reducing prediction error. Higher values indicate greater importance
