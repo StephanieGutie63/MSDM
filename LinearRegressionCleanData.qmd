@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-## Predictive Analysis
+## Library Loading
 
 ```{r}
 #| message: false
@@ -16,27 +16,33 @@ library(janitor)
 library(lubridate)
 ```
 
+## Read CSV
+
 ```{r}
 msdm_data <- read.csv("msdm_cleandata.csv")
-head(msdm_data)
+head(msdm_data,3)
 #view(msdm_data)
 #str(msdm_data)
 ```
+
+## Clean Data Part 1
 
 ```{r}
 #Clean Variable Names
 SurveyData <- clean_names(msdm_data) |>  #clean SurveyData names
               clean_names(case= "upper_camel") #clean up using upper_camel
 
-head(SurveyData) #check to see changes made to SurveyData
+#head(SurveyData) #check to see changes made to SurveyData
 
 #change startdate to Date
 SurveyData$RecordedDate <- as.Date(SurveyData$RecordedDate,
   format = "%m/%d/%Y %H:%M:%S")
 
 str(SurveyData$RecordedDate)
-head(SurveyData)
+#head(SurveyData)
 ```
+
+## Clean Survey Variables
 
 ```{r}
 #| message: false
@@ -92,10 +98,14 @@ CleanSurveyData <- SurveyData |>
     SearchInterest = Question17
   )
 
-head(CleanSurveyData)
+head(CleanSurveyData,3)
 ```
 
+## Clean Data Part 2
+
 ```{r}
+#| message: false
+#| warning: false
 #Clean Data
 #recode any values not recoded on SPSS and Qualtrics
 CleanSurveyData$MemberInterest <-
@@ -125,10 +135,14 @@ CleanSurveyDataJoin<- CleanSurveyData |>
     WtpDollars= coalesce(WtpDollars, WillingnessToPayText)
   )
 
-head(CleanSurveyDataJoin$WtpDollars,20)
+head(CleanSurveyDataJoin$WtpDollars,10)
 ```
 
+## Full Messy Correlation Matrix
+
 ```{r}
+#| message: false
+#| warning: false
 library(corrplot)
 #PairWise Correlation of Continuous Variables
 #new Data Set to keep everything numeric
@@ -139,6 +153,8 @@ CorMatrixAll = cor(DataForCorAnalysisAll, use= "pairwise.complete.obs")
 
 corrplot(CorMatrixAll, method = 'shade', addCoef.col = 'black', type = 'full', number.cex = 0.6, order = 'original', diag= FALSE)
 ```
+
+## Correlation Matrix Cleaned 
 
 ```{r}
 #Narrow Down Correlation Matrix
@@ -155,6 +171,8 @@ corrplot(CorMatrix, method = 'shade', addCoef.col = 'black', type = 'full', numb
 #  select(MembershipInterest,AgeGroup,Gender, YogaExperience) |> #filtering 4 survey #questions
 #str(model_data) #shows 50 obs of 4 variables
 ```
+
+## Linear Regressions 
 
 ```{r}
 #Linear Regression 1
@@ -238,6 +256,8 @@ ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Practic
 summary(ModelSurvey6)
 ```
 
+## Random Forest (Failed)
+
 ```{r}
 #Random Forest Predictor Failed because of Sample Size
 #remove NA respondents
@@ -245,7 +265,7 @@ set.seed(123)
 library(randomForest)
 
 model_data <- CleanSurveyDataJoin|> #new data to use for predicitive analysis
-                 select(WtpDollars,YogaFrequency,AgeGroup,Gender, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) |>
+                 select(WtpDollars,YogaFrequency,AgeGroup,Gender, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) |> #select 
                  na.omit()
 
 
@@ -259,6 +279,231 @@ varImpPlot(rf)
 print(rf)
 ```
 
-Left Panel: shows error increases when variable is shuffled randomly, higher value means variable is more important, negatiive means varible is not helping the model and may make noise
+## Decision Tree
 
-Right Panel: How much each variable improves the decision trees by reducing prediction error. Higher values indicate greater importance
+```{r}
+#| message: false
+#| warning: false
+library(rpart)
+library(rpart.plot)
+set.seed(123)
+
+model_data2 <- CleanSurveyDataJoin|> #new data to use for predicitive analysis
+                 select(WtpDollars,YogaFrequency,VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest, AgeGroup, Gender, Country) |> 
+                 na.omit()
+
+ dt <- rpart( #decison tree 
+  WtpDollars ~ .,
+  data = model_data2,
+  method = "class")
+  
+  rpart.plot(
+  dt,
+  type = 2,
+  extra = 104,
+  fallen.leaves = TRUE,
+  box.palette = "Greens"
+)
+summary(dt)
+```
+
+The decision tree shows a that at the root predicted WillingnesstoPay to be 2.99 with 100% of of respondents. The numbers underneath mean that \$0 represents 23%, \$2.99 represents 30%, \$3.99 represents 10%, \$4.99 represents 20%, and \$5.99 represents17% of all respondents. The first split shows that Yoga Frequency being less than 5 was the most important predictor. The first thing that separates willingness to pay is how frequently someone practices yoga.
+
+The left branch shows that if there are less frequent yoga practitioners than 5 the tree predicts them answering \$2.99, but if MemberInterest is less than 3 the predicted willingness to pay is \$0. People who practice yoga less frequently and have low membership interest predict to pay \$0. These respondents are unlikely to purchase a membership. If MemberInterest is greater than 3 then the prediction changes to \$4.99 at 30%. Even if someone doesn't practice yoga very frequently high membership interest increases predicted willingness to pay.
+
+The right branch shows YogaFrequency\>=5 these respondents are predicted to pay \$3.99 representing 27% of respondents. Frequent yoga practitioners are predicted to pay around \$3.99 regardless of membership interest in this tree.
+
+The Decision Tree suggest that Yoga Frequency is the most important predictor and frequent practitioners are willing to pay more for a membership. Engagement level is the strongest determinant of willingness to pay. Membership interest further separated those unwilling to pay from those willing ot pay, less frequent practitioners, membership interest separates those who would pay nothing form those wiling to pay \~\$4.99.
+
+## Cluster Analysis 1
+
+```{r}
+library(factoextra)
+set.seed(123)
+
+model_data3 <- CleanSurveyDataJoin|> #new data to use for predicitive analysis
+                 select(WtpDollars,YogaFrequency, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) |> 
+                 na.omit() #omit NA values
+
+cluster_scaled <- scale(model_data3)
+
+fviz_nbclust(
+  cluster_scaled,
+  kmeans,
+  method = "wss"
+)
+
+##Cluster at 3 
+k3 <- kmeans(
+  cluster_scaled,
+  centers = 3,
+  nstart = 25
+)
+
+
+model_data3$Cluster <- factor(k3$cluster)
+
+fviz_cluster(
+  k3,
+  data = cluster_scaled,
+  ellipse.type = "convex"
+)
+```
+
+### Elbow Plot
+
+Noticeable bend around K=3, or K=4
+
+### Cluster Plot
+
+Cluseter shows respondents naturally seperate into 3 groups.
+
+1.  Cluster (Red): Right side
+
+2.  Cluster (Green): Small group between 2 clusters
+
+3.  Cluster (Blue): Left side
+
+```{r}
+model_data3 %>%
+  mutate(Cluster = factor(k3$cluster)) %>%
+  group_by(Cluster) %>%
+  summarise(across(everything(), mean))
+```
+
+### Cluster 1: Low Membership Potential
+
+#### Characteristics: 
+
+1.  Lowest willingness to pay\~\$2.31
+
+2.  Lowest membership interest \~1.44
+
+3.  Lowest likelihood of visiting the website \~2.63
+
+4.  Highest yoga experience among the clusters \~2.76
+
+#### Marketing Strategy: 
+
+These respondents appear experience yoga practitioners but are not very interested in a Sino Yoga membership. Focus on increase value of membership, explaining membership benefits, free educational content before promoting subsriptions
+
+### Cluster2: High Yoga Frequency but Price Sensitive
+
+#### Characteristics: 
+
+1.  Practice yoga more frequently \~4.5
+
+2.  Moderate willingness to pay \~2.99
+
+3.  Moderate membership interest \~2
+
+4.  Lower yoga experience \~2.06
+
+#### Marketing Strategy: 
+
+These respondents appear active but not convinced of the membership value. Focus on trial memberships, beginner friendly member content, and YouTube live reminders.
+
+### Cluster3: High Value Audience
+
+#### Characteristics: 
+
+1.  Highest willingness to pay\~\$5.29
+
+2.  Highest membership interest\~2.76
+
+3.  Highest website visit likelihood \~2.63
+
+4.  Regular yoga practitioners \~3.76
+
+#### Marketing Strategy: 
+
+These respondents appear to be the ideal market customers. Focus on membership promotions, premium content, exclusive classes, community benefits, direct call to actions from YouTube to website.
+
+```{r}
+table(k3$cluster)
+
+```
+
+## Cluster Analysis 2 
+
+Performing cluster analysis again as K=2 cluster because it makes it more reliable and easier to interpret.
+
+```{r}
+library(factoextra)
+set.seed(123)
+
+model_data3 <- CleanSurveyDataJoin|> #new data to use for predicitive analysis
+                 select(WtpDollars,YogaFrequency, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) |> 
+                 na.omit() #omit NA values
+
+cluster_scaled <- scale(model_data3)
+
+fviz_nbclust(
+  cluster_scaled,
+  kmeans,
+  method = "wss"
+)
+
+##Cluster at 2 
+k2 <- kmeans(
+  cluster_scaled,
+  centers = 2,
+  nstart = 25
+)
+
+
+model_data3$Cluster <- factor(k2$cluster)
+
+fviz_cluster(
+  k2,
+  data = cluster_scaled,
+  ellipse.type = "convex"
+)
+```
+
+```{r}
+model_data3 %>%
+  mutate(Cluster = factor(k2$cluster)) %>%
+  group_by(Cluster) %>%
+  summarise(across(everything(), mean))
+```
+
+```{r}
+table(k2$cluster)
+```
+
+### Cluster 1: Price Conscious Audience
+
+#### Characteristics: 
+
+1.  Lowest willingness to pay\~\$2.35
+
+2.  Lowest membership interest \~1.41
+
+3.  Lowest likelihood of visiting the website \~2.65
+
+4.  Highest yoga experience among the clusters \~2.67
+
+#### Marketing Strategy: 
+
+These respondents appears to be interested in yoga but not convinced of the value of a membership. Focus on providing relevant free YouTube content, emphasize value of membership through testimonials, exclusive content. Use email and YouTube shorts to increase engagement before asking for membership purchases.
+
+### Cluster2: High Value Membership Prospects
+
+#### Characteristics: 
+
+1.  Highest willingness to pay\~\$5.16
+
+2.  Highest membership interest\~2.78
+
+3.  Highest website visit likelihood \~3.83
+
+4.  Regular yoga practitioners \~2.11
+
+#### Marketing Strategy: 
+
+These respondents appears to be Sino Yoga's highest converting audience. Focus on promoting memberships, highlighting premium member benefits, direct viewers to website with strong call to actions, offer exclusive live classes and community access.
+
+## Cluster Analysis Importance
+
+The strongest distinction between the clusters in engagement with the brand, not yoga behavior alone. Respondents who are more interested in Sino Yoga memberships are more likely to visit the website and also willing to pay more. Increasing user engagement with Sino Yoga is likely to have a greater impact on membership conversion than targeting demographic characteristics.

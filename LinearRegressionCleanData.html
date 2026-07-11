@@ -99,8 +99,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="predictive-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="predictive-analysis">Predictive Analysis</h2>
+<section id="library-loading" class="level2">
+<h2 class="anchored" data-anchor-id="library-loading">Library Loading</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -108,471 +108,291 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="read-csv" class="level2">
+<h2 class="anchored" data-anchor-id="read-csv">Read CSV</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>msdm_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"msdm_cleandata.csv"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(msdm_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(msdm_data,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       IPAddress       RecordedDate Question_1 Question_2 Question_3_1
 1 146.75.253.248 2/10/2026 10:19:19          1          3            1
 2  96.37.220.196 2/10/2026 10:26:36          1          3            1
 3  24.64.125.120 2/10/2026 10:27:24          1          3            1
-4  104.55.12.239 2/11/2026 18:47:05          1          3            1
-5   24.90.22.231 2/11/2026 19:00:01          1          1            1
-6  104.28.86.122 2/11/2026 19:08:54          1          2            1
   Question_3_2 Question_3_3 Question_3_4 Question_3_5 Question_3_6 Question_3_7
 1            1            0            1            1            1            0
 2            1            1            1            1            1            1
 3            0            1            0            1            1            0
-4            0            0            1            1            1            0
-5            0            0            1            0            0            0
-6            0            1            1            1            0            0
   Question_3_8 Question_3_8_TEXT Question_4 Question_5_1 Question_5_2
 1            0                            5            5            5
 2            0                            4            2            5
 3            0                            4            4            4
-4            0                            4            5            5
-5            0                            5            5            3
-6            0                            5            5            5
   Question_5_3 Question_6_1 Question_6_2 Question_6_3 Question_6_4 Question_7_1
 1            5            0            0            0            1            4
 2            4            0            0            1            0            4
 3            4            0            0            0            1            3
-4            4            1            1            1            1            3
-5            4            0            1            0            0            3
-6            5            0            1            1            1            3
   Question_7_2 Question_7_3 Question_7_4 Question_7_5 Question_7_6 Question_7_7
 1            4            4            4            4            5            4
 2            4            5            4            4            3            2
 3            4            4            4            5            5            3
-4            3            4            5            4            3            4
-5            3            4            4            1            3            3
-6            4            4            4            5            2            2
   Question_8 Question_9 Question_9_5_TEXT Question_10 Question_11_1
 1         29          4                NA           4             1
 2         27          5                 0           4             1
 3         29          3                NA           4             1
-4         28          1                NA           2             1
-5         28          2                NA           2             1
-6         27          2                NA           3             1
   Question_11_2 Question_11_3 Question_11_4 Question_11_5 Question_12
 1             1             0             0             0           3
 2             1             0             0             0           3
 3             0             0             0             0           4
-4             0             0             1             0           4
-5             0             0             1             0           4
-6             0             0             0             0           4
   Question_13 Question_14 Question_15_1 Question_15_2 Question_15_3
 1           1           6             1             0             0
 2           1           4             1             0             0
 3           0           3             1             0             0
-4           1           2             1             0             0
-5           1           6             1             0             0
-6           1           5             1             0             0
   Question_15_4 Question_15_5 Question_15_5_TEXT Question_16 Question_17
 1             1             0                 NA         187           3
 2             0             0                 NA         187           3
 3             0             0                 NA          31           4
-4             0             0                 NA         187           2
-5             0             0                 NA         187           4
-6             0             0                 NA         185           4
   filter_. PrimaryLast Miss Missi WTP_DOLLARS
 1        1           1    0     0        5.99
 2        1           1    0     0          NA
-3        1           1    0     0        4.99
-4        1           1    0     0        2.99
-5        1           1    0     0        3.99
-6        1           1    0     0        3.99</code></pre>
+3        1           1    0     0        4.99</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#view(msdm_data)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#str(msdm_data)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="clean-data-part-1" class="level2">
+<h2 class="anchored" data-anchor-id="clean-data-part-1">Clean Data Part 1</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean Variable Names</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>SurveyData <span class="ot">&lt;-</span> <span class="fu">clean_names</span>(msdm_data) <span class="sc">|&gt;</span>  <span class="co">#clean SurveyData names</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">clean_names</span>(<span class="at">case=</span> <span class="st">"upper_camel"</span>) <span class="co">#clean up using upper_camel</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SurveyData) <span class="co">#check to see changes made to SurveyData</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       IpAddress       RecordedDate Question1 Question2 Question3_1 Question3_2
-1 146.75.253.248 2/10/2026 10:19:19         1         3           1           1
-2  96.37.220.196 2/10/2026 10:26:36         1         3           1           1
-3  24.64.125.120 2/10/2026 10:27:24         1         3           1           0
-4  104.55.12.239 2/11/2026 18:47:05         1         3           1           0
-5   24.90.22.231 2/11/2026 19:00:01         1         1           1           0
-6  104.28.86.122 2/11/2026 19:08:54         1         2           1           0
-  Question3_3 Question3_4 Question3_5 Question3_6 Question3_7 Question3_8
-1           0           1           1           1           0           0
-2           1           1           1           1           1           0
-3           1           0           1           1           0           0
-4           0           1           1           1           0           0
-5           0           1           0           0           0           0
-6           1           1           1           0           0           0
-  Question3_8Text Question4 Question5_1 Question5_2 Question5_3 Question6_1
-1                         5           5           5           5           0
-2                         4           2           5           4           0
-3                         4           4           4           4           0
-4                         4           5           5           4           1
-5                         5           5           3           4           0
-6                         5           5           5           5           0
-  Question6_2 Question6_3 Question6_4 Question7_1 Question7_2 Question7_3
-1           0           0           1           4           4           4
-2           0           1           0           4           4           5
-3           0           0           1           3           4           4
-4           1           1           1           3           3           4
-5           1           0           0           3           3           4
-6           1           1           1           3           4           4
-  Question7_4 Question7_5 Question7_6 Question7_7 Question8 Question9
-1           4           4           5           4        29         4
-2           4           4           3           2        27         5
-3           4           5           5           3        29         3
-4           5           4           3           4        28         1
-5           4           1           3           3        28         2
-6           4           5           2           2        27         2
-  Question9_5Text Question10 Question11_1 Question11_2 Question11_3
-1              NA          4            1            1            0
-2               0          4            1            1            0
-3              NA          4            1            0            0
-4              NA          2            1            0            0
-5              NA          2            1            0            0
-6              NA          3            1            0            0
-  Question11_4 Question11_5 Question12 Question13 Question14 Question15_1
-1            0            0          3          1          6            1
-2            0            0          3          1          4            1
-3            0            0          4          0          3            1
-4            1            0          4          1          2            1
-5            1            0          4          1          6            1
-6            0            0          4          1          5            1
-  Question15_2 Question15_3 Question15_4 Question15_5 Question15_5Text
-1            0            0            1            0               NA
-2            0            0            0            0               NA
-3            0            0            0            0               NA
-4            0            0            0            0               NA
-5            0            0            0            0               NA
-6            0            0            0            0               NA
-  Question16 Question17 Filter PrimaryLast Miss Missi WtpDollars
-1        187          3      1           1    0     0       5.99
-2        187          3      1           1    0     0         NA
-3         31          4      1           1    0     0       4.99
-4        187          2      1           1    0     0       2.99
-5        187          4      1           1    0     0       3.99
-6        185          4      1           1    0     0       3.99</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#change startdate to Date</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>SurveyData<span class="sc">$</span>RecordedDate <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(SurveyData<span class="sc">$</span>RecordedDate,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(SurveyData<span class="sc">$</span>RecordedDate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#head(SurveyData) #check to see changes made to SurveyData</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#change startdate to Date</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>SurveyData<span class="sc">$</span>RecordedDate <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(SurveyData<span class="sc">$</span>RecordedDate,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"%m/%d/%Y %H:%M:%S"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(SurveyData<span class="sc">$</span>RecordedDate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Date[1:61], format: "2026-02-10" "2026-02-10" "2026-02-10" "2026-02-11" "2026-02-11" ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(SurveyData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       IpAddress RecordedDate Question1 Question2 Question3_1 Question3_2
-1 146.75.253.248   2026-02-10         1         3           1           1
-2  96.37.220.196   2026-02-10         1         3           1           1
-3  24.64.125.120   2026-02-10         1         3           1           0
-4  104.55.12.239   2026-02-11         1         3           1           0
-5   24.90.22.231   2026-02-11         1         1           1           0
-6  104.28.86.122   2026-02-11         1         2           1           0
-  Question3_3 Question3_4 Question3_5 Question3_6 Question3_7 Question3_8
-1           0           1           1           1           0           0
-2           1           1           1           1           1           0
-3           1           0           1           1           0           0
-4           0           1           1           1           0           0
-5           0           1           0           0           0           0
-6           1           1           1           0           0           0
-  Question3_8Text Question4 Question5_1 Question5_2 Question5_3 Question6_1
-1                         5           5           5           5           0
-2                         4           2           5           4           0
-3                         4           4           4           4           0
-4                         4           5           5           4           1
-5                         5           5           3           4           0
-6                         5           5           5           5           0
-  Question6_2 Question6_3 Question6_4 Question7_1 Question7_2 Question7_3
-1           0           0           1           4           4           4
-2           0           1           0           4           4           5
-3           0           0           1           3           4           4
-4           1           1           1           3           3           4
-5           1           0           0           3           3           4
-6           1           1           1           3           4           4
-  Question7_4 Question7_5 Question7_6 Question7_7 Question8 Question9
-1           4           4           5           4        29         4
-2           4           4           3           2        27         5
-3           4           5           5           3        29         3
-4           5           4           3           4        28         1
-5           4           1           3           3        28         2
-6           4           5           2           2        27         2
-  Question9_5Text Question10 Question11_1 Question11_2 Question11_3
-1              NA          4            1            1            0
-2               0          4            1            1            0
-3              NA          4            1            0            0
-4              NA          2            1            0            0
-5              NA          2            1            0            0
-6              NA          3            1            0            0
-  Question11_4 Question11_5 Question12 Question13 Question14 Question15_1
-1            0            0          3          1          6            1
-2            0            0          3          1          4            1
-3            0            0          4          0          3            1
-4            1            0          4          1          2            1
-5            1            0          4          1          6            1
-6            0            0          4          1          5            1
-  Question15_2 Question15_3 Question15_4 Question15_5 Question15_5Text
-1            0            0            1            0               NA
-2            0            0            0            0               NA
-3            0            0            0            0               NA
-4            0            0            0            0               NA
-5            0            0            0            0               NA
-6            0            0            0            0               NA
-  Question16 Question17 Filter PrimaryLast Miss Missi WtpDollars
-1        187          3      1           1    0     0       5.99
-2        187          3      1           1    0     0         NA
-3         31          4      1           1    0     0       4.99
-4        187          2      1           1    0     0       2.99
-5        187          4      1           1    0     0       3.99
-6        185          4      1           1    0     0       3.99</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#head(SurveyData)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
+</section>
+<section id="clean-survey-variables" class="level2">
+<h2 class="anchored" data-anchor-id="clean-survey-variables">Clean Survey Variables</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#change variable names</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>CleanSurveyData <span class="ot">&lt;-</span> SurveyData <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PracticeYogaInterest =</span> Question1,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaExperience =</span> Question2,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityGroupYoga=</span> Question3_1,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityPrivate=</span> Question3_2,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityOnline=</span> Question3_3,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityPreRecorded=</span> Question3_4,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityBooks=</span> Question3_5,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityFriends=</span> Question3_6,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivitySelfTaught=</span> Question3_7,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityOther=</span> Question3_8,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivitiesOtherText =</span> Question3_8Text,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaFrequency =</span> Question4,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaContent =</span> Question5_1,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaLifestyle =</span> Question5_2,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaInfoSeeking =</span> Question5_3,</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">PreferredVideoShorts =</span> Question6_1,</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">PreferredVideoShortVideo =</span> Question6_2,</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">PreferredVideoMedium =</span> Question6_3,</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">PreferredVideoFulllength =</span> Question6_4,</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">BeginnerFlowInterest =</span> Question7_1,</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">StressReliefFlowInterest =</span> Question7_2,</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">TraditionalChineseInterest =</span> Question7_3,</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">BreathworkInterest =</span> Question7_4,</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">FullLengthInterest =</span> Question7_5,</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">MonthlyProgramInterest =</span> Question7_6,</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">ShortDailyInterest =</span> Question7_7,</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">MembershipInterest =</span> Question8,</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPay =</span> Question9,</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPayText =</span> Question9_5Text,</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">VisitLikelihood =</span> Question10,</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">YoutubeSocialPlatform =</span> Question11_1,</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">InstagramSocialPlatform =</span> Question11_2,</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">TIkTokSocialPlatform =</span> Question11_3,</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">FacebookSocialPlatform =</span> Question11_4,</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">PinterestSocialPlatforms =</span> Question11_5,</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeGroup =</span> Question12,</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gender =</span> Question13,</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">IncomeBracket =</span> Question14,</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">EnglishLanguage =</span> Question15_1,</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">MandarinLanguage =</span> Question15_2,</span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">CantoneseLanguage =</span> Question15_3,</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">SpanishLanguage =</span> Question15_4,</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">OtherLanguage =</span> Question15_5,</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">OtherLanguageText =</span> Question15_5Text,</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">Country =</span> Question16,</span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">SearchInterest =</span> Question17</span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CleanSurveyData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#change variable names</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>CleanSurveyData <span class="ot">&lt;-</span> SurveyData <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">PracticeYogaInterest =</span> Question1,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaExperience =</span> Question2,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityGroup=</span> Question3_1,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityPrivate=</span> Question3_2,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityOnline=</span> Question3_3,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityPreRec=</span> Question3_4,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityBook=</span> Question3_5,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityFriend=</span> Question3_6,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivitySelfTaught=</span> Question3_7,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivityOther=</span> Question3_8,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaActivitiesOtherText =</span> Question3_8Text,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaFrequency =</span> Question4,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaContent =</span> Question5_1,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaLifestyle =</span> Question5_2,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">YogaInfoSeeking =</span> Question5_3,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">PrefVideoShorts =</span> Question6_1,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">PrefVideoShortVideo =</span> Question6_2,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">PrefVideoMedium =</span> Question6_3,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">PrefVideoFulllength =</span> Question6_4,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">BegFlowInterest =</span> Question7_1,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">StressReliefInterest =</span> Question7_2,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">TradChineseInterest =</span> Question7_3,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">BreathworkInterest =</span> Question7_4,</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">FullLengthInterest =</span> Question7_5,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">MonthProgramInterest =</span> Question7_6,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">ShortDailyInterest =</span> Question7_7,</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">MemberInterest =</span> Question8,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPay =</span> Question9,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPayText =</span> Question9_5Text,</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">VisitLikelihood =</span> Question10,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">YoutubeSocial =</span> Question11_1,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">InstagramSocial =</span> Question11_2,</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">TIkTokSocial =</span> Question11_3,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">FacebookSocial=</span> Question11_4,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">PinterestSocial =</span> Question11_5,</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeGroup =</span> Question12,</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">Gender =</span> Question13,</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">IncomeBracket =</span> Question14,</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">EnglishLang =</span> Question15_1,</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">MandarinLang =</span> Question15_2,</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">CantoneseLang =</span> Question15_3,</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">SpanishLang=</span> Question15_4,</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">OtherLang =</span> Question15_5,</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">OtherLangeText =</span> Question15_5Text,</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">Country =</span> Question16,</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">SearchInterest =</span> Question17</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CleanSurveyData,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       IpAddress RecordedDate PracticeYogaInterest YogaExperience
 1 146.75.253.248   2026-02-10                    1              3
 2  96.37.220.196   2026-02-10                    1              3
 3  24.64.125.120   2026-02-10                    1              3
-4  104.55.12.239   2026-02-11                    1              3
-5   24.90.22.231   2026-02-11                    1              1
-6  104.28.86.122   2026-02-11                    1              2
-  YogaActivityGroupYoga YogaActivityPrivate YogaActivityOnline
-1                     1                   1                  0
-2                     1                   1                  1
-3                     1                   0                  1
-4                     1                   0                  0
-5                     1                   0                  0
-6                     1                   0                  1
-  YogaActivityPreRecorded YogaActivityBooks YogaActivityFriends
-1                       1                 1                   1
-2                       1                 1                   1
-3                       0                 1                   1
-4                       1                 1                   1
-5                       1                 0                   0
-6                       1                 1                   0
-  YogaActivitySelfTaught YogaActivityOther YogaActivitiesOtherText
-1                      0                 0                        
-2                      1                 0                        
-3                      0                 0                        
-4                      0                 0                        
-5                      0                 0                        
-6                      0                 0                        
-  YogaFrequency YogaContent YogaLifestyle YogaInfoSeeking PreferredVideoShorts
-1             5           5             5               5                    0
-2             4           2             5               4                    0
-3             4           4             4               4                    0
-4             4           5             5               4                    1
-5             5           5             3               4                    0
-6             5           5             5               5                    0
-  PreferredVideoShortVideo PreferredVideoMedium PreferredVideoFulllength
-1                        0                    0                        1
-2                        0                    1                        0
-3                        0                    0                        1
-4                        1                    1                        1
-5                        1                    0                        0
-6                        1                    1                        1
-  BeginnerFlowInterest StressReliefFlowInterest TraditionalChineseInterest
-1                    4                        4                          4
-2                    4                        4                          5
-3                    3                        4                          4
-4                    3                        3                          4
-5                    3                        3                          4
-6                    3                        4                          4
-  BreathworkInterest FullLengthInterest MonthlyProgramInterest
-1                  4                  4                      5
-2                  4                  4                      3
-3                  4                  5                      5
-4                  5                  4                      3
-5                  4                  1                      3
-6                  4                  5                      2
-  ShortDailyInterest MembershipInterest WillingnessToPay WillingnessToPayText
-1                  4                 29                4                   NA
-2                  2                 27                5                    0
-3                  3                 29                3                   NA
-4                  4                 28                1                   NA
-5                  3                 28                2                   NA
-6                  2                 27                2                   NA
-  VisitLikelihood YoutubeSocialPlatform InstagramSocialPlatform
-1               4                     1                       1
-2               4                     1                       1
-3               4                     1                       0
-4               2                     1                       0
-5               2                     1                       0
-6               3                     1                       0
-  TIkTokSocialPlatform FacebookSocialPlatform PinterestSocialPlatforms AgeGroup
-1                    0                      0                        0        3
-2                    0                      0                        0        3
-3                    0                      0                        0        4
-4                    0                      1                        0        4
-5                    0                      1                        0        4
-6                    0                      0                        0        4
-  Gender IncomeBracket EnglishLanguage MandarinLanguage CantoneseLanguage
-1      1             6               1                0                 0
-2      1             4               1                0                 0
-3      0             3               1                0                 0
-4      1             2               1                0                 0
-5      1             6               1                0                 0
-6      1             5               1                0                 0
-  SpanishLanguage OtherLanguage OtherLanguageText Country SearchInterest Filter
-1               1             0                NA     187              3      1
-2               0             0                NA     187              3      1
-3               0             0                NA      31              4      1
-4               0             0                NA     187              2      1
-5               0             0                NA     187              4      1
-6               0             0                NA     185              4      1
+  YogaActivityGroup YogaActivityPrivate YogaActivityOnline YogaActivityPreRec
+1                 1                   1                  0                  1
+2                 1                   1                  1                  1
+3                 1                   0                  1                  0
+  YogaActivityBook YogaActivityFriend YogaActivitySelfTaught YogaActivityOther
+1                1                  1                      0                 0
+2                1                  1                      1                 0
+3                1                  1                      0                 0
+  YogaActivitiesOtherText YogaFrequency YogaContent YogaLifestyle
+1                                     5           5             5
+2                                     4           2             5
+3                                     4           4             4
+  YogaInfoSeeking PrefVideoShorts PrefVideoShortVideo PrefVideoMedium
+1               5               0                   0               0
+2               4               0                   0               1
+3               4               0                   0               0
+  PrefVideoFulllength BegFlowInterest StressReliefInterest TradChineseInterest
+1                   1               4                    4                   4
+2                   0               4                    4                   5
+3                   1               3                    4                   4
+  BreathworkInterest FullLengthInterest MonthProgramInterest ShortDailyInterest
+1                  4                  4                    5                  4
+2                  4                  4                    3                  2
+3                  4                  5                    5                  3
+  MemberInterest WillingnessToPay WillingnessToPayText VisitLikelihood
+1             29                4                   NA               4
+2             27                5                    0               4
+3             29                3                   NA               4
+  YoutubeSocial InstagramSocial TIkTokSocial FacebookSocial PinterestSocial
+1             1               1            0              0               0
+2             1               1            0              0               0
+3             1               0            0              0               0
+  AgeGroup Gender IncomeBracket EnglishLang MandarinLang CantoneseLang
+1        3      1             6           1            0             0
+2        3      1             4           1            0             0
+3        4      0             3           1            0             0
+  SpanishLang OtherLang OtherLangeText Country SearchInterest Filter
+1           1         0             NA     187              3      1
+2           0         0             NA     187              3      1
+3           0         0             NA      31              4      1
   PrimaryLast Miss Missi WtpDollars
 1           1    0     0       5.99
 2           1    0     0         NA
-3           1    0     0       4.99
-4           1    0     0       2.99
-5           1    0     0       3.99
-6           1    0     0       3.99</code></pre>
+3           1    0     0       4.99</code></pre>
 </div>
 </div>
+</section>
+<section id="clean-data-part-2" class="level2">
+<h2 class="anchored" data-anchor-id="clean-data-part-2">Clean Data Part 2</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#join text and regular wtp</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>CleanSurveyDataJoin<span class="ot">&lt;-</span> CleanSurveyData <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPayText=</span> <span class="fu">as.numeric</span>(WillingnessToPayText),</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">WtpDollars=</span> <span class="fu">coalesce</span>(WtpDollars, WillingnessToPayText)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CleanSurveyDataJoin<span class="sc">$</span>WtpDollars,<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean Data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#recode any values not recoded on SPSS and Qualtrics</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>CleanSurveyData<span class="sc">$</span>MemberInterest <span class="ot">&lt;-</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">recode</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    CleanSurveyData<span class="sc">$</span>MemberInterest,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">27</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">28</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">2</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">29</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Clean country to categorical</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>CleanSurveyData<span class="sc">$</span>Country <span class="ot">&lt;-</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    CleanSurveyData<span class="sc">$</span>Country,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">31</span>,<span class="dv">185</span>,<span class="dv">187</span>),</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"China"</span>,<span class="st">"Taiwan"</span>,<span class="st">"United States"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#clean gender </span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>CleanSurveyData<span class="sc">$</span>Gender <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(CleanSurveyData<span class="sc">$</span>Gender)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#join text and regular wtp</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>CleanSurveyDataJoin<span class="ot">&lt;-</span> CleanSurveyData <span class="sc">|&gt;</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">WillingnessToPayText=</span> <span class="fu">as.numeric</span>(WillingnessToPayText),</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">WtpDollars=</span> <span class="fu">coalesce</span>(WtpDollars, WillingnessToPayText)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CleanSurveyDataJoin<span class="sc">$</span>WtpDollars,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  5.99  0.00  4.99  2.99  3.99  3.99 20.00  0.00    NA  3.99  2.99  2.99
-[13]  4.99  0.00  5.99  2.99  2.99  2.99    NA  3.99</code></pre>
+<pre><code> [1]  5.99  0.00  4.99  2.99  3.99  3.99 20.00  0.00    NA  3.99</code></pre>
 </div>
 </div>
+</section>
+<section id="full-messy-correlation-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="full-messy-correlation-matrix">Full Messy Correlation Matrix</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'corrplot' was built under R version 4.5.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>corrplot 0.95 loaded</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#PairWise Correlation of Continuous Variables</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#new Data Set to keep everything numeric</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(CleanSurveyData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#PairWise Correlation of Continuous Variables</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#new Data Set to keep everything numeric</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(CleanSurveyData)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   61 obs. of  53 variables:
- $ IpAddress                 : chr  "146.75.253.248" "96.37.220.196" "24.64.125.120" "104.55.12.239" ...
- $ RecordedDate              : Date, format: "2026-02-10" "2026-02-10" ...
- $ PracticeYogaInterest      : int  1 1 1 1 1 1 1 1 1 1 ...
- $ YogaExperience            : int  3 3 3 3 1 2 3 3 3 3 ...
- $ YogaActivityGroupYoga     : int  1 1 1 1 1 1 1 1 1 1 ...
- $ YogaActivityPrivate       : int  1 1 0 0 0 0 0 0 0 0 ...
- $ YogaActivityOnline        : int  0 1 1 0 0 1 0 1 0 0 ...
- $ YogaActivityPreRecorded   : int  1 1 0 1 1 1 1 1 1 1 ...
- $ YogaActivityBooks         : int  1 1 1 1 0 1 0 1 0 0 ...
- $ YogaActivityFriends       : int  1 1 1 1 0 0 0 1 1 0 ...
- $ YogaActivitySelfTaught    : int  0 1 0 0 0 0 1 0 1 0 ...
- $ YogaActivityOther         : int  0 0 0 0 0 0 0 1 0 0 ...
- $ YogaActivitiesOtherText   : chr  " " " " " " " " ...
- $ YogaFrequency             : int  5 4 4 4 5 5 5 2 3 3 ...
- $ YogaContent               : int  5 2 4 5 5 5 4 4 4 3 ...
- $ YogaLifestyle             : int  5 5 4 5 3 5 5 4 4 2 ...
- $ YogaInfoSeeking           : int  5 4 4 4 4 5 3 3 4 2 ...
- $ PreferredVideoShorts      : int  0 0 0 1 0 0 0 0 0 0 ...
- $ PreferredVideoShortVideo  : int  0 0 0 1 1 1 1 1 0 1 ...
- $ PreferredVideoMedium      : int  0 1 0 1 0 1 1 1 1 0 ...
- $ PreferredVideoFulllength  : int  1 0 1 1 0 1 1 0 1 0 ...
- $ BeginnerFlowInterest      : int  4 4 3 3 3 3 2 4 4 4 ...
- $ StressReliefFlowInterest  : int  4 4 4 3 3 4 4 4 4 4 ...
- $ TraditionalChineseInterest: int  4 5 4 4 4 4 5 4 4 4 ...
- $ BreathworkInterest        : int  4 4 4 5 4 4 4 5 4 2 ...
- $ FullLengthInterest        : int  4 4 5 4 1 5 5 4 3 4 ...
- $ MonthlyProgramInterest    : int  5 3 5 3 3 2 2 2 3 4 ...
- $ ShortDailyInterest        : int  4 2 3 4 3 2 2 1 2 2 ...
- $ MembershipInterest        : int  29 27 29 28 28 27 27 27 28 28 ...
- $ WillingnessToPay          : int  4 5 3 1 2 2 5 5 NA 2 ...
- $ WillingnessToPayText      : int  NA 0 NA NA NA NA 20 0 NA NA ...
- $ VisitLikelihood           : int  4 4 4 2 2 3 4 3 4 2 ...
- $ YoutubeSocialPlatform     : int  1 1 1 1 1 1 1 NA 1 1 ...
- $ InstagramSocialPlatform   : int  1 1 0 0 0 0 1 NA 0 1 ...
- $ TIkTokSocialPlatform      : int  0 0 0 0 0 0 0 NA 0 0 ...
- $ FacebookSocialPlatform    : int  0 0 0 1 1 0 0 NA 0 0 ...
- $ PinterestSocialPlatforms  : int  0 0 0 0 0 0 0 NA 0 0 ...
- $ AgeGroup                  : int  3 3 4 4 4 4 2 4 3 3 ...
- $ Gender                    : int  1 1 0 1 1 1 1 1 1 1 ...
- $ IncomeBracket             : int  6 4 3 2 6 5 4 6 6 4 ...
- $ EnglishLanguage           : int  1 1 1 1 1 1 1 1 1 1 ...
- $ MandarinLanguage          : int  0 0 0 0 0 0 0 0 0 0 ...
- $ CantoneseLanguage         : int  0 0 0 0 0 0 0 0 0 0 ...
- $ SpanishLanguage           : int  1 0 0 0 0 0 0 0 0 0 ...
- $ OtherLanguage             : int  0 0 0 0 0 0 0 0 0 0 ...
- $ OtherLanguageText         : logi  NA NA NA NA NA NA ...
- $ Country                   : int  187 187 31 187 187 185 9 187 187 10 ...
- $ SearchInterest            : int  3 3 4 2 4 4 2 3 3 2 ...
- $ Filter                    : int  1 1 1 1 1 1 1 1 1 1 ...
- $ PrimaryLast               : int  1 1 1 1 1 1 1 1 1 1 ...
- $ Miss                      : int  0 0 0 0 0 0 0 0 0 0 ...
- $ Missi                     : int  0 0 0 0 0 0 0 5 1 0 ...
- $ WtpDollars                : num  5.99 NA 4.99 2.99 3.99 3.99 NA NA NA 3.99 ...</code></pre>
+ $ IpAddress              : chr  "146.75.253.248" "96.37.220.196" "24.64.125.120" "104.55.12.239" ...
+ $ RecordedDate           : Date, format: "2026-02-10" "2026-02-10" ...
+ $ PracticeYogaInterest   : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ YogaExperience         : int  3 3 3 3 1 2 3 3 3 3 ...
+ $ YogaActivityGroup      : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ YogaActivityPrivate    : int  1 1 0 0 0 0 0 0 0 0 ...
+ $ YogaActivityOnline     : int  0 1 1 0 0 1 0 1 0 0 ...
+ $ YogaActivityPreRec     : int  1 1 0 1 1 1 1 1 1 1 ...
+ $ YogaActivityBook       : int  1 1 1 1 0 1 0 1 0 0 ...
+ $ YogaActivityFriend     : int  1 1 1 1 0 0 0 1 1 0 ...
+ $ YogaActivitySelfTaught : int  0 1 0 0 0 0 1 0 1 0 ...
+ $ YogaActivityOther      : int  0 0 0 0 0 0 0 1 0 0 ...
+ $ YogaActivitiesOtherText: chr  " " " " " " " " ...
+ $ YogaFrequency          : int  5 4 4 4 5 5 5 2 3 3 ...
+ $ YogaContent            : int  5 2 4 5 5 5 4 4 4 3 ...
+ $ YogaLifestyle          : int  5 5 4 5 3 5 5 4 4 2 ...
+ $ YogaInfoSeeking        : int  5 4 4 4 4 5 3 3 4 2 ...
+ $ PrefVideoShorts        : int  0 0 0 1 0 0 0 0 0 0 ...
+ $ PrefVideoShortVideo    : int  0 0 0 1 1 1 1 1 0 1 ...
+ $ PrefVideoMedium        : int  0 1 0 1 0 1 1 1 1 0 ...
+ $ PrefVideoFulllength    : int  1 0 1 1 0 1 1 0 1 0 ...
+ $ BegFlowInterest        : int  4 4 3 3 3 3 2 4 4 4 ...
+ $ StressReliefInterest   : int  4 4 4 3 3 4 4 4 4 4 ...
+ $ TradChineseInterest    : int  4 5 4 4 4 4 5 4 4 4 ...
+ $ BreathworkInterest     : int  4 4 4 5 4 4 4 5 4 2 ...
+ $ FullLengthInterest     : int  4 4 5 4 1 5 5 4 3 4 ...
+ $ MonthProgramInterest   : int  5 3 5 3 3 2 2 2 3 4 ...
+ $ ShortDailyInterest     : int  4 2 3 4 3 2 2 1 2 2 ...
+ $ MemberInterest         : num  3 1 3 2 2 1 1 1 2 2 ...
+ $ WillingnessToPay       : int  4 5 3 1 2 2 5 5 NA 2 ...
+ $ WillingnessToPayText   : int  NA 0 NA NA NA NA 20 0 NA NA ...
+ $ VisitLikelihood        : int  4 4 4 2 2 3 4 3 4 2 ...
+ $ YoutubeSocial          : int  1 1 1 1 1 1 1 NA 1 1 ...
+ $ InstagramSocial        : int  1 1 0 0 0 0 1 NA 0 1 ...
+ $ TIkTokSocial           : int  0 0 0 0 0 0 0 NA 0 0 ...
+ $ FacebookSocial         : int  0 0 0 1 1 0 0 NA 0 0 ...
+ $ PinterestSocial        : int  0 0 0 0 0 0 0 NA 0 0 ...
+ $ AgeGroup               : int  3 3 4 4 4 4 2 4 3 3 ...
+ $ Gender                 : Factor w/ 2 levels "0","1": 2 2 1 2 2 2 2 2 2 2 ...
+ $ IncomeBracket          : int  6 4 3 2 6 5 4 6 6 4 ...
+ $ EnglishLang            : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ MandarinLang           : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ CantoneseLang          : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ SpanishLang            : int  1 0 0 0 0 0 0 0 0 0 ...
+ $ OtherLang              : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ OtherLangeText         : logi  NA NA NA NA NA NA ...
+ $ Country                : Factor w/ 3 levels "China","Taiwan",..: 3 3 1 3 3 2 NA 3 3 NA ...
+ $ SearchInterest         : int  3 3 4 2 4 4 2 3 3 2 ...
+ $ Filter                 : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ PrimaryLast            : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ Miss                   : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ Missi                  : int  0 0 0 0 0 0 0 5 1 0 ...
+ $ WtpDollars             : num  5.99 NA 4.99 2.99 3.99 3.99 NA NA NA 3.99 ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>DataForCorAnalysis <span class="ot">=</span> CleanSurveyDataJoin <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">select</span>(Gender, YogaExperience, WillingnessToPay, PracticeYogaInterest, WtpDollars,MembershipInterest, YogaFrequency, PreferredVideoShorts)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>CorMatrix <span class="ot">=</span> <span class="fu">cor</span>(DataForCorAnalysis, <span class="at">use=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(CorMatrix, <span class="at">method =</span> <span class="st">'shade'</span>, <span class="at">addCoef.col =</span> <span class="st">'black'</span>, <span class="at">type =</span> <span class="st">'full'</span>, <span class="at">number.cex =</span> <span class="fl">0.6</span>, <span class="at">order =</span> <span class="st">'original'</span>, <span class="at">diag=</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>DataForCorAnalysisAll <span class="ot">=</span> CleanSurveyDataJoin <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>CorMatrixAll <span class="ot">=</span> <span class="fu">cor</span>(DataForCorAnalysisAll, <span class="at">use=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(CorMatrixAll, <span class="at">method =</span> <span class="st">'shade'</span>, <span class="at">addCoef.col =</span> <span class="st">'black'</span>, <span class="at">type =</span> <span class="st">'full'</span>, <span class="at">number.cex =</span> <span class="fl">0.6</span>, <span class="at">order =</span> <span class="st">'original'</span>, <span class="at">diag=</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -581,26 +401,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="correlation-matrix-cleaned" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-matrix-cleaned">Correlation Matrix Cleaned</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#membership interest of people who answered all 4 survey questions</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#model_data &lt;- CleanSurveyData|&gt; #new data to use for predicitive analysis</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(MembershipInterest,AgeGroup,Gender, YogaExperience) |&gt; #filtering 4 survey #questions</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#str(model_data) #shows 50 obs of 4 variables</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Narrow Down Correlation Matrix</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>DataForCorAnalysis <span class="ot">=</span> CleanSurveyDataJoin <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">select</span>(YogaExperience, WillingnessToPay,SearchInterest,YogaContent,MandarinLang, VisitLikelihood, WtpDollars,MemberInterest, YogaFrequency, PrefVideoShorts)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>CorMatrix <span class="ot">=</span> <span class="fu">cor</span>(DataForCorAnalysis, <span class="at">use=</span> <span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(CorMatrix, <span class="at">method =</span> <span class="st">'shade'</span>, <span class="at">addCoef.col =</span> <span class="st">'black'</span>, <span class="at">type =</span> <span class="st">'full'</span>, <span class="at">number.cex =</span> <span class="fl">0.6</span>, <span class="at">order =</span> <span class="st">'original'</span>, <span class="at">diag=</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regression 1</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#library(tidymodels)</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#membership interest of people who answered all 4 survey questions</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#model_data &lt;- CleanSurveyData|&gt; #new data to use for predicitive analysis</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  select(MembershipInterest,AgeGroup,Gender, YogaExperience) |&gt; #filtering 4 survey #questions</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#str(model_data) #shows 50 obs of 4 variables</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="linear-regressions" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regressions">Linear Regressions</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regression 1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#library(tidymodels)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'rio' was built under R version 4.5.3</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ModelSurvey<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> YogaFrequency, CleanSurveyDataJoin)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ModelSurvey<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> YogaFrequency, CleanSurveyDataJoin)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -622,75 +463,625 @@ Residual standard error: 3.098 on 45 degrees of freedom
 Multiple R-squared:  0.1002,    Adjusted R-squared:  0.08019 
 F-statistic:  5.01 on 1 and 45 DF,  p-value: 0.03019</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#shows r-squared 0. </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#adjusted r-squared 0.125</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#significant overall 0.0479&lt;5%</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#membershipinterest = 0.018</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#if age stays the same but membeship interest increases the willingess to pay increases by 0.48cents</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#people who are intersted in the membership will be wiling to pay more</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#focus on membeship content</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#shows r-squared 0. </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#adjusted r-squared 0.125</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#significant overall 0.0479&lt;5%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#membershipinterest = 0.018</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#if age stays the same but membeship interest increases the willingess to pay increases by 0.48cents</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#people who are intersted in the membership will be wiling to pay more</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#focus on membeship content</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 2</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey2<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> MembershipInterest, CleanSurveyData)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 2</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey2<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> VisitLikelihood, CleanSurveyDataJoin)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = WtpDollars ~ MembershipInterest, data = CleanSurveyData)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--1.92605 -0.92605 -0.03859  1.07395  1.96141 
-
-Coefficients:
-                   Estimate Std. Error t value Pr(&gt;|t|)  
-(Intercept)         -8.3959     5.4886  -1.530   0.1356  
-MembershipInterest   0.4437     0.1912   2.321   0.0266 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.14 on 33 degrees of freedom
-  (26 observations deleted due to missingness)
-Multiple R-squared:  0.1403,    Adjusted R-squared:  0.1142 
-F-statistic: 5.385 on 1 and 33 DF,  p-value: 0.02664</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 3</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey3<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> YogaExperience<span class="sc">+</span>IncomeBracket, CleanSurveyData)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = WtpDollars ~ YogaExperience + IncomeBracket, data = CleanSurveyData)
+lm(formula = WtpDollars ~ VisitLikelihood, data = CleanSurveyDataJoin)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.1216 -1.0357 -0.1995  1.1743  2.0964 
+-4.3341 -1.4376  0.4689  1.0301 15.6659 
 
 Coefficients:
-               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     5.17767    0.56872   9.104 3.88e-10 ***
-YogaExperience -0.29589    0.23132  -1.279    0.211    
-IncomeBracket  -0.06607    0.12178  -0.543    0.591    
+                Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)      -0.4142     1.5350  -0.270  0.78850   
+VisitLikelihood   1.1871     0.4292   2.765  0.00821 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.209 on 30 degrees of freedom
-  (28 observations deleted due to missingness)
-Multiple R-squared:  0.07901,   Adjusted R-squared:  0.01761 
-F-statistic: 1.287 on 2 and 30 DF,  p-value: 0.2909</code></pre>
+Residual standard error: 3.02 on 45 degrees of freedom
+  (14 observations deleted due to missingness)
+Multiple R-squared:  0.1453,    Adjusted R-squared:  0.1263 
+F-statistic: 7.648 on 1 and 45 DF,  p-value: 0.008214</code></pre>
 </div>
 </div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 3</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey3<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> VisitLikelihood<span class="sc">+</span>YogaFrequency, CleanSurveyDataJoin)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = WtpDollars ~ VisitLikelihood + YogaFrequency, data = CleanSurveyDataJoin)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-4.952 -1.783  0.064  1.123 15.048 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)      -1.9957     1.8312  -1.090    0.282  
+VisitLikelihood   0.9744     0.4452   2.189    0.034 *
+YogaFrequency     0.6099     0.3981   1.532    0.133  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.976 on 44 degrees of freedom
+  (14 observations deleted due to missingness)
+Multiple R-squared:  0.1885,    Adjusted R-squared:  0.1517 
+F-statistic: 5.112 on 2 and 44 DF,  p-value: 0.01009</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 4</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey4<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> AgeGroup<span class="sc">+</span>Gender<span class="sc">+</span>YogaFrequency<span class="sc">+</span>MandarinLang, CleanSurveyDataJoin)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = WtpDollars ~ AgeGroup + Gender + YogaFrequency + 
+    MandarinLang, data = CleanSurveyDataJoin)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.2644 -1.3039  0.3332  0.9990 12.8827 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)     6.8533     3.4966   1.960   0.0568 .
+AgeGroup       -1.8529     0.7520  -2.464   0.0180 *
+Gender1        -1.2990     1.8763  -0.692   0.4926  
+YogaFrequency   1.0538     0.4004   2.632   0.0119 *
+MandarinLang    1.7922     1.0136   1.768   0.0845 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.99 on 41 degrees of freedom
+  (15 observations deleted due to missingness)
+Multiple R-squared:  0.2356,    Adjusted R-squared:  0.161 
+F-statistic: 3.159 on 4 and 41 DF,  p-value: 0.02365</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 5</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey5<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> AgeGroup<span class="sc">+</span>Gender<span class="sc">+</span>YogaFrequency<span class="sc">+</span>MandarinLang<span class="sc">+</span>Country, CleanSurveyDataJoin)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = WtpDollars ~ AgeGroup + Gender + YogaFrequency + 
+    MandarinLang + Country, data = CleanSurveyDataJoin)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.4649 -1.2701  0.2077  1.2739  3.1604 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)            2.6957     2.6517   1.017  0.31697   
+AgeGroup              -0.4037     0.5916  -0.682  0.49986   
+Gender1               -1.4681     1.2767  -1.150  0.25870   
+YogaFrequency          0.5490     0.3475   1.580  0.12398   
+MandarinLang           2.0863     0.7615   2.740  0.00997 **
+CountryTaiwan          2.6809     1.7140   1.564  0.12763   
+CountryUnited States   0.5700     1.2330   0.462  0.64699   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.944 on 32 degrees of freedom
+  (22 observations deleted due to missingness)
+Multiple R-squared:  0.329, Adjusted R-squared:  0.2032 
+F-statistic: 2.616 on 6 and 32 DF,  p-value: 0.03541</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 5</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey6<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> AgeGroup<span class="sc">+</span>Gender<span class="sc">+</span>YogaFrequency<span class="sc">+</span>MandarinLang<span class="sc">+</span>PracticeYogaInterest, CleanSurveyDataJoin)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = WtpDollars ~ AgeGroup + Gender + YogaFrequency + 
+    MandarinLang + PracticeYogaInterest, data = CleanSurveyDataJoin)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.4444 -1.3057  0.2226  1.1166 12.7088 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)            5.0789     4.2698   1.189  0.24126   
+AgeGroup              -1.8467     0.7564  -2.442  0.01914 * 
+Gender1               -1.2114     1.8907  -0.641  0.52537   
+YogaFrequency          1.1524     0.4246   2.714  0.00976 **
+MandarinLang           1.6992     1.0273   1.654  0.10594   
+PracticeYogaInterest   1.3550     1.8495   0.733  0.46805   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.007 on 40 degrees of freedom
+  (15 observations deleted due to missingness)
+Multiple R-squared:  0.2457,    Adjusted R-squared:  0.1514 
+F-statistic: 2.606 on 5 and 40 DF,  p-value: 0.03935</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Linear Regresssion 5</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>ModelSurvey6<span class="ot">=</span> <span class="fu">lm</span>(WtpDollars <span class="sc">~</span> AgeGroup<span class="sc">+</span>Gender<span class="sc">+</span>YogaFrequency<span class="sc">+</span>MandarinLang<span class="sc">+</span>PracticeYogaInterest<span class="sc">+</span>YoutubeSocial, CleanSurveyDataJoin)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelSurvey6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = WtpDollars ~ AgeGroup + Gender + YogaFrequency + 
+    MandarinLang + PracticeYogaInterest + YoutubeSocial, data = CleanSurveyDataJoin)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.4685 -1.4381  0.5215  0.9636 12.2511 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)            6.8197     4.7645   1.431   0.1610  
+AgeGroup              -2.2804     0.8568  -2.661   0.0116 *
+Gender1               -1.4773     1.9671  -0.751   0.4575  
+YogaFrequency          1.0087     0.4590   2.198   0.0345 *
+MandarinLang           2.0578     1.1060   1.861   0.0710 .
+PracticeYogaInterest   1.0747     1.8870   0.570   0.5725  
+YoutubeSocial          0.8494     1.3858   0.613   0.5438  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.048 on 36 degrees of freedom
+  (18 observations deleted due to missingness)
+Multiple R-squared:  0.2569,    Adjusted R-squared:  0.133 
+F-statistic: 2.074 on 6 and 36 DF,  p-value: 0.08077</code></pre>
+</div>
+</div>
+</section>
+<section id="random-forest-failed" class="level2">
+<h2 class="anchored" data-anchor-id="random-forest-failed">Random Forest (Failed)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Random Forest Predictor Failed because of Sample Size</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#remove NA respondents</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(randomForest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'randomForest' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>randomForest 4.7-1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type rfNews() to see new features/changes/bug fixes.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'randomForest'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    margin</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> CleanSurveyDataJoin<span class="sc">|&gt;</span> <span class="co">#new data to use for predicitive analysis</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">select</span>(WtpDollars,YogaFrequency,AgeGroup,Gender, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) <span class="sc">|&gt;</span> <span class="co">#select </span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">na.omit</span>()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fu">randomForest</span>(</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  WtpDollars <span class="sc">~</span> .,</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data,</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">importance =</span> <span class="cn">TRUE</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ randomForest(formula = WtpDollars ~ ., data = model_data, importance = TRUE) 
+               Type of random forest: regression
+                     Number of trees: 500
+No. of variables tried at each split: 2
+
+          Mean of squared residuals: 12.31125
+                    % Var explained: -3.94</code></pre>
+</div>
+</div>
+</section>
+<section id="decision-tree" class="level2">
+<h2 class="anchored" data-anchor-id="decision-tree">Decision Tree</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>model_data2 <span class="ot">&lt;-</span> CleanSurveyDataJoin<span class="sc">|&gt;</span> <span class="co">#new data to use for predicitive analysis</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">select</span>(WtpDollars,YogaFrequency,VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest, AgeGroup, Gender, Country) <span class="sc">|&gt;</span> </span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">na.omit</span>()</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a> dt <span class="ot">&lt;-</span> <span class="fu">rpart</span>( <span class="co">#decison tree </span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  WtpDollars <span class="sc">~</span> .,</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data2,</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"class"</span>)</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rpart.plot</span>(</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  dt,</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="dv">2</span>,</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">extra =</span> <span class="dv">104</span>,</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">fallen.leaves =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">box.palette =</span> <span class="st">"Greens"</span></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+rpart(formula = WtpDollars ~ ., data = model_data2, method = "class")
+  n= 30 
+
+         CP nsplit rel error   xerror       xstd
+1 0.0952381      0 1.0000000 1.285714 0.07824608
+2 0.0100000      2 0.8095238 1.333333 0.06506000
+
+Variable importance
+ MemberInterest   YogaFrequency VisitLikelihood  YogaExperience         Country 
+             36              32              12               8               8 
+         Gender 
+              4 
+
+Node number 1: 30 observations,    complexity param=0.0952381
+  predicted class=2.99  expected loss=0.7  P(node) =1
+    class counts:     7     9     3     6     5
+   probabilities: 0.233 0.300 0.100 0.200 0.167 
+  left son=2 (22 obs) right son=3 (8 obs)
+  Primary splits:
+      YogaFrequency   &lt; 4.5 to the left,  improve=1.856061, (0 missing)
+      VisitLikelihood &lt; 3.5 to the left,  improve=1.595777, (0 missing)
+      MemberInterest  &lt; 2.5 to the left,  improve=1.405732, (0 missing)
+      YogaExperience  &lt; 2.5 to the right, improve=1.390750, (0 missing)
+      AgeGroup        &lt; 3.5 to the right, improve=1.036683, (0 missing)
+  Surrogate splits:
+      Country splits as  LRL, agree=0.767, adj=0.125, (0 split)
+
+Node number 2: 22 observations,    complexity param=0.0952381
+  predicted class=2.99  expected loss=0.6363636  P(node) =0.7333333
+    class counts:     7     8     0     4     3
+   probabilities: 0.318 0.364 0.000 0.182 0.136 
+  left son=4 (13 obs) right son=5 (9 obs)
+  Primary splits:
+      MemberInterest  &lt; 2.5 to the left,  improve=2.1204350, (0 missing)
+      YogaExperience  &lt; 2.5 to the right, improve=1.4058440, (0 missing)
+      VisitLikelihood &lt; 2.5 to the left,  improve=1.0987010, (0 missing)
+      YogaFrequency   &lt; 3.5 to the left,  improve=0.5819736, (0 missing)
+      AgeGroup        &lt; 3.5 to the right, improve=0.4281274, (0 missing)
+  Surrogate splits:
+      VisitLikelihood &lt; 2.5 to the left,  agree=0.727, adj=0.333, (0 split)
+      YogaExperience  &lt; 2.5 to the right, agree=0.682, adj=0.222, (0 split)
+      Gender          splits as  RL,      agree=0.636, adj=0.111, (0 split)
+      Country         splits as  LRL,     agree=0.636, adj=0.111, (0 split)
+
+Node number 3: 8 observations
+  predicted class=3.99  expected loss=0.625  P(node) =0.2666667
+    class counts:     0     1     3     2     2
+   probabilities: 0.000 0.125 0.375 0.250 0.250 
+
+Node number 4: 13 observations
+  predicted class=0     expected loss=0.5384615  P(node) =0.4333333
+    class counts:     6     6     0     0     1
+   probabilities: 0.462 0.462 0.000 0.000 0.077 
+
+Node number 5: 9 observations
+  predicted class=4.99  expected loss=0.5555556  P(node) =0.3
+    class counts:     1     2     0     4     2
+   probabilities: 0.111 0.222 0.000 0.444 0.222 </code></pre>
+</div>
+</div>
+<p>The decision tree shows a that at the root predicted WillingnesstoPay to be 2.99 with 100% of of respondents. The numbers underneath mean that $0 represents 23%, $2.99 represents 30%, $3.99 represents 10%, $4.99 represents 20%, and $5.99 represents17% of all respondents. The first split shows that Yoga Frequency being less than 5 was the most important predictor. The first thing that separates willingness to pay is how frequently someone practices yoga.</p>
+<p>The left branch shows that if there are less frequent yoga practitioners than 5 the tree predicts them answering $2.99, but if MemberInterest is less than 3 the predicted willingness to pay is $0. People who practice yoga less frequently and have low membership interest predict to pay $0. These respondents are unlikely to purchase a membership. If MemberInterest is greater than 3 then the prediction changes to $4.99 at 30%. Even if someone doesn’t practice yoga very frequently high membership interest increases predicted willingness to pay.</p>
+<p>The right branch shows YogaFrequency&gt;=5 these respondents are predicted to pay $3.99 representing 27% of respondents. Frequent yoga practitioners are predicted to pay around $3.99 regardless of membership interest in this tree.</p>
+<p>The Decision Tree suggest that Yoga Frequency is the most important predictor and frequent practitioners are willing to pay more for a membership. Engagement level is the strongest determinant of willingness to pay. Membership interest further separated those unwilling to pay from those willing ot pay, less frequent practitioners, membership interest separates those who would pay nothing form those wiling to pay ~$4.99.</p>
+</section>
+<section id="cluster-analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis-1">Cluster Analysis 1</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'factoextra' was built under R version 4.5.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to factoextra!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Want to learn more? See two factoextra-related books at https://www.datanovia.com/en/product/practical-guide-to-principal-component-methods-in-r/</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>model_data3 <span class="ot">&lt;-</span> CleanSurveyDataJoin<span class="sc">|&gt;</span> <span class="co">#new data to use for predicitive analysis</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">select</span>(WtpDollars,YogaFrequency, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) <span class="sc">|&gt;</span> </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">na.omit</span>() <span class="co">#omit NA values</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(model_data3)</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  cluster_scaled,</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  kmeans,</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"wss"</span></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Cluster at 3 </span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>k3 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  cluster_scaled,</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">centers =</span> <span class="dv">3</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nstart =</span> <span class="dv">25</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>model_data3<span class="sc">$</span>Cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(k3<span class="sc">$</span>cluster)</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>  k3,</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cluster_scaled,</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ellipse.type =</span> <span class="st">"convex"</span></span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="elbow-plot" class="level3">
+<h3 class="anchored" data-anchor-id="elbow-plot">Elbow Plot</h3>
+<p>Noticeable bend around K=3, or K=4</p>
+</section>
+<section id="cluster-plot" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-plot">Cluster Plot</h3>
+<p>Cluseter shows respondents naturally seperate into 3 groups.</p>
+<ol type="1">
+<li><p>Cluster (Red): Right side</p></li>
+<li><p>Cluster (Green): Small group between 2 clusters</p></li>
+<li><p>Cluster (Blue): Left side</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>model_data3 <span class="sc">%&gt;%</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Cluster =</span> <span class="fu">factor</span>(k3<span class="sc">$</span>cluster)) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), mean))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  Cluster WtpDollars YogaFrequency VisitLikelihood YogaExperience
+  &lt;fct&gt;        &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+1 1             2.31          3.69            2.62           2.75
+2 2             2.99          4.5             3.5            2   
+3 3             5.29          3.76            3.82           2.06
+# ℹ 2 more variables: PracticeYogaInterest &lt;dbl&gt;, MemberInterest &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="cluster-1-low-membership-potential" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-1-low-membership-potential">Cluster 1: Low Membership Potential</h3>
+<section id="characteristics" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics">Characteristics:</h4>
+<ol type="1">
+<li><p>Lowest willingness to pay~$2.31</p></li>
+<li><p>Lowest membership interest ~1.44</p></li>
+<li><p>Lowest likelihood of visiting the website ~2.63</p></li>
+<li><p>Highest yoga experience among the clusters ~2.76</p></li>
+</ol>
+</section>
+<section id="marketing-strategy" class="level4">
+<h4 class="anchored" data-anchor-id="marketing-strategy">Marketing Strategy:</h4>
+<p>These respondents appear experience yoga practitioners but are not very interested in a Sino Yoga membership. Focus on increase value of membership, explaining membership benefits, free educational content before promoting subsriptions</p>
+</section>
+</section>
+<section id="cluster2-high-yoga-frequency-but-price-sensitive" class="level3">
+<h3 class="anchored" data-anchor-id="cluster2-high-yoga-frequency-but-price-sensitive">Cluster2: High Yoga Frequency but Price Sensitive</h3>
+<section id="characteristics-1" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics-1">Characteristics:</h4>
+<ol type="1">
+<li><p>Practice yoga more frequently ~4.5</p></li>
+<li><p>Moderate willingness to pay ~2.99</p></li>
+<li><p>Moderate membership interest ~2</p></li>
+<li><p>Lower yoga experience ~2.06</p></li>
+</ol>
+</section>
+<section id="marketing-strategy-1" class="level4">
+<h4 class="anchored" data-anchor-id="marketing-strategy-1">Marketing Strategy:</h4>
+<p>These respondents appear active but not convinced of the membership value. Focus on trial memberships, beginner friendly member content, and YouTube live reminders.</p>
+</section>
+</section>
+<section id="cluster3-high-value-audience" class="level3">
+<h3 class="anchored" data-anchor-id="cluster3-high-value-audience">Cluster3: High Value Audience</h3>
+<section id="characteristics-2" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics-2">Characteristics:</h4>
+<ol type="1">
+<li><p>Highest willingness to pay~$5.29</p></li>
+<li><p>Highest membership interest~2.76</p></li>
+<li><p>Highest website visit likelihood ~2.63</p></li>
+<li><p>Regular yoga practitioners ~3.76</p></li>
+</ol>
+</section>
+<section id="marketing-strategy-2" class="level4">
+<h4 class="anchored" data-anchor-id="marketing-strategy-2">Marketing Strategy:</h4>
+<p>These respondents appear to be the ideal market customers. Focus on membership promotions, premium content, exclusive classes, community benefits, direct call to actions from YouTube to website.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(k3<span class="sc">$</span>cluster)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2  3 
+16  2 17 </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="cluster-analysis-2" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis-2">Cluster Analysis 2</h2>
+<p>Performing cluster analysis again as K=2 cluster because it makes it more reliable and easier to interpret.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>model_data3 <span class="ot">&lt;-</span> CleanSurveyDataJoin<span class="sc">|&gt;</span> <span class="co">#new data to use for predicitive analysis</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">select</span>(WtpDollars,YogaFrequency, VisitLikelihood, YogaExperience,PracticeYogaInterest, MemberInterest) <span class="sc">|&gt;</span> </span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">na.omit</span>() <span class="co">#omit NA values</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>cluster_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(model_data3)</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  cluster_scaled,</span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>  kmeans,</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"wss"</span></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Cluster at 2 </span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>k2 <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  cluster_scaled,</span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">centers =</span> <span class="dv">2</span>,</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nstart =</span> <span class="dv">25</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>model_data3<span class="sc">$</span>Cluster <span class="ot">&lt;-</span> <span class="fu">factor</span>(k2<span class="sc">$</span>cluster)</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>  k2,</span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> cluster_scaled,</span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ellipse.type =</span> <span class="st">"convex"</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LinearRegressionCleanData_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>model_data3 <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Cluster =</span> <span class="fu">factor</span>(k2<span class="sc">$</span>cluster)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Cluster) <span class="sc">%&gt;%</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), mean))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 7
+  Cluster WtpDollars YogaFrequency VisitLikelihood YogaExperience
+  &lt;fct&gt;        &lt;dbl&gt;         &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+1 1             2.35          3.71            2.65           2.65
+2 2             5.16          3.83            3.83           2.11
+# ℹ 2 more variables: PracticeYogaInterest &lt;dbl&gt;, MemberInterest &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(k2<span class="sc">$</span>cluster)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ 1  2 
+17 18 </code></pre>
+</div>
+</div>
+<section id="cluster-1-price-conscious-audience" class="level3">
+<h3 class="anchored" data-anchor-id="cluster-1-price-conscious-audience">Cluster 1: Price Conscious Audience</h3>
+<section id="characteristics-3" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics-3">Characteristics:</h4>
+<ol type="1">
+<li><p>Lowest willingness to pay~$2.35</p></li>
+<li><p>Lowest membership interest ~1.41</p></li>
+<li><p>Lowest likelihood of visiting the website ~2.65</p></li>
+<li><p>Highest yoga experience among the clusters ~2.67</p></li>
+</ol>
+</section>
+<section id="marketing-strategy-3" class="level4">
+<h4 class="anchored" data-anchor-id="marketing-strategy-3">Marketing Strategy:</h4>
+<p>These respondents appears to be interested in yoga but not convinced of the value of a membership. Focus on providing relevant free YouTube content, emphasize value of membership through testimonials, exclusive content. Use email and YouTube shorts to increase engagement before asking for membership purchases.</p>
+</section>
+</section>
+<section id="cluster2-high-value-membership-prospects" class="level3">
+<h3 class="anchored" data-anchor-id="cluster2-high-value-membership-prospects">Cluster2: High Value Membership Prospects</h3>
+<section id="characteristics-4" class="level4">
+<h4 class="anchored" data-anchor-id="characteristics-4">Characteristics:</h4>
+<ol type="1">
+<li><p>Highest willingness to pay~$5.16</p></li>
+<li><p>Highest membership interest~2.78</p></li>
+<li><p>Highest website visit likelihood ~3.83</p></li>
+<li><p>Regular yoga practitioners ~2.11</p></li>
+</ol>
+</section>
+<section id="marketing-strategy-4" class="level4">
+<h4 class="anchored" data-anchor-id="marketing-strategy-4">Marketing Strategy:</h4>
+<p>These respondents appears to be Sino Yoga’s highest converting audience. Focus on promoting memberships, highlighting premium member benefits, direct viewers to website with strong call to actions, offer exclusive live classes and community access.</p>
+</section>
+</section>
+</section>
+<section id="cluster-analysis-importance" class="level2">
+<h2 class="anchored" data-anchor-id="cluster-analysis-importance">Cluster Analysis Importance</h2>
+<p>The strongest distinction between the clusters in engagement with the brand, not yoga behavior alone. Respondents who are more interested in Sino Yoga memberships are more likely to visit the website and also willing to pay more. Increasing user engagement with Sino Yoga is likely to have a greater impact on membership conversion than targeting demographic characteristics.</p>
 </section>
 
 </main>
