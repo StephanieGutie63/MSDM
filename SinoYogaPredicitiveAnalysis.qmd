@@ -1,7 +1,7 @@
 ---
 title: "Sino Yoga Predictive Analysis"
 subtitle: "Qualtrics IRB Survey"
-author: "Jae Jung"
+author: "Stephanie Gutierrez, Erika Barajas, Marlen Garcia, Abby Ortiz"
 date: last-modified
 format:
   html:
@@ -36,15 +36,76 @@ Sino Yoga's primary growth objectives shape the analytical scope of this engagem
 
 ## Membership Monetization
 
+> (input about membership)\*\*
+
 # Data Wrangling 
 
-## Data Importing 
+## Data Collection
+
+### Data
+
+The data used in this predictive analysis for the brand Sino Yoga is from an IRB approved survey produced using Qualtrics Experience Management. The survey consisted of 17 questions, and consent form that was distributed electronically using a convenience sampling by distributing the survey through the client's online channels and outreach efforts. The survey link was distributed using Reddit and Facebook yoga groups, with the target population for this study consisting of U.S based adults between ages 18-65 years of age that practice yoga, consume wellness content online. or express interest in yoga instruction. The survey was distributed from February 10, 2026 to June 9, 2026 in that time frame we received 73 responses, although not all respondents answered every question.
+
+### Data Export
+
+This data collected was downloaded on Qualtrics as a sav file using SPSS exporting tool. Once the **sinoyogadata.sav** file was downloaded we used SPSS to clean the data. The dataset consisted of 74 observations and 61 variables that needed to be transformed, wrangled, and visualized.
+
+![](images/clipboard-739043488.png)
+
+![](images/clipboard-2336630452.png)
+
+### Data Initial Cleaning
+
+1.  We started by removing the meta data we did not need such as variables named **StartDate, EndDate, Status, Progress, Duration_in_seconds\_, Finished, Q_RecaptchaScore,** and **QID2**. After clearing that off the file we got 74 observations and 63 variables.
+
+2.  We checked for duplicate responses using the **IPAddress** data**,** we created a variable named **PrimaryLast** through the Data\> Identify duplicate cases, using the **IPAddress** as the identifier. This showed 1 repeating **IPAddress** response Using Data\>Select Cases\>If condition is satisfied, we created a filter **PrimaryLast=1**. Using this case, we kept the last response the respondent made before we closed the survey count.
+
+![](images/clipboard-100959980.png){fig-align="center" width="270"}
+
+![](images/clipboard-3806351656.png){fig-align="center" width="270"}
+
+![](images/clipboard-2714334814.png)
+
+![](images/clipboard-3490050290.png)
+
+3.  We checked to make sure the data we were analyzing was between the collected time frame period of February 10,2026 to June 9, 2026. The IRB approval created 2 responses we did not need to analyze before our survey launch date. We used Data\>Select Cases and made a filter to add to remove that data from being used.
+
+    ![](images/clipboard-3492526445.png){width="354"}
+
+    ![](images/clipboard-2108879455.png)
+
+4.  We checked for Missing data using (Analyze\>Descriptive\>Frequencies) selecting all questions and see how many were unanswered for each question. We then used (Transform\>count values within cases) created a new (Target Variable: **Missi)** and inputted all question variables and in (Define Values) we put (System-Missing). Using this new variable we updated the select cases condition to Missi\<43 since with multiple choice questions the overall available answers were 45 questions. This indicated if someone answered less than 2 questions to remove the respondent from our data.
+
+![](images/clipboard-2704324888.png){fig-align="center" width="245"}
+
+![](images/clipboard-1937794642.png){fig-align="center" width="495"}
+
+5.  Lastly on SPSS we made sure Willingness to Pay was in correct values as a numeric dollar amount to calculate the mean for predictive analysis. creating a Willingness to Pay(WTP_DOLLARS) variable using (Transform\> re code into different values) we made 1= 2.99, 2=3.99, 3=4.99, 4=5.99, and 5-sys_missing. Using this new variable we were able to find the mean of the willingness to pay not including the other:text input as \~4.33, for us to determine that 4.99 was the best value for the mean of willingness to pay.
+
+![](images/clipboard-2202186619.png){fig-align="center" width="233"}
+
+![](images/clipboard-1271299785.png){fig-align="center" width="335"}
+
+6.  We saved this new dataset as **msdm_cleandata.csv** to use in Rstudio to clean, transform, wrangle , and visualzie in predictive analysis.
+
+# SPSS Descriptive Analysis 
+
+Thirty-five respondents selected one of the predefined price options, while 26 respondents provided open-ended responses. Because the open-ended responses were non-numeric and not directly comparable to the fixed pricing categories, they were excluded from the quantitative analysis.
+
+Although \$2.99 was the most frequently selected price point (34.3%), the mean willingness to pay was \$4.33, indicating that respondents were, on average, willing to pay more than the lowest pricing tier. Since the average respondent is willing to pay \$4.33, choosing **\$4.99** places the price close to the center of respondents' willingness to pay while increasing revenue per subscriber. About 42.8% of respondents selected either \$4.99 or \$5.99 suggesting that nearly half of the respondents were comfortable paying a premium membership price. \
+
+# R Predictive Analysis
+
+## Data Wrangling
+
+Creating a new project in Rstudio called MSDM we attached a Github repository to work as a team in predictive analysis.
 
 ### Load Libraries
 
 ```{r}
 #| message: false
 #| warning: false
+# Load libraries
 library(haven)
 library(tidyverse)
 library(dplyr)
@@ -54,6 +115,8 @@ library(lubridate)
 
 ## Read CSV
 
+Using read.csv() we opened the new downloaded msdm_cleandata.csv that has 61 observations and 53 variables, in a dataset called **msdm_data**, and viewing only the top 3 observations of the data.
+
 ```{r}
 msdm_data <- read.csv("msdm_cleandata.csv")
 head(msdm_data,3)
@@ -61,7 +124,9 @@ head(msdm_data,3)
 #str(msdm_data)
 ```
 
-## Clean Data Part 1
+## Clean_name and Date
+
+We cleaned the dataset **msdm_data** by upper_camel the varaibale names and also removing any spaces and special characters. Afterwards we renamed that dataset as **SurveyData** to keep seperate. We changed the **RecordedDate** variable to Date format and checked to make sure it was changed.
 
 ```{r}
 #Clean Variable Names
@@ -78,7 +143,9 @@ str(SurveyData$RecordedDate)
 #head(SurveyData)
 ```
 
-## Clean Survey Variables
+## Survey Variables
+
+We cleaned the survey variable names for the questions to be easier to identify using rename(). Then those renamed variables were included in the new dataset named **CleanSurveyData.**
 
 ```{r}
 #| message: false
@@ -139,6 +206,8 @@ head(CleanSurveyData,3)
 
 ## Clean Data Part 2
 
+We re coded any variables that were not re coded in SPSS such as **MemberInterest, Country,** and **Gender.** Lastly we joined the variable **WillingnessToPayText** with **WtpDollars** using coalesce, only after changing the **WillingnessToPayText** to numeric variables and anything not able to be changed to numeric to be NA. We kept the joined variables into WtpDollars and just renamed the dataset CleanSurveyDataJoin. This became the final transforming and cleaning of the dataset before the predictive analysis.
+
 ```{r}
 #| message: false
 #| warning: false
@@ -174,7 +243,9 @@ CleanSurveyDataJoin<- CleanSurveyData |>
 head(CleanSurveyDataJoin$WtpDollars,10)
 ```
 
-## Full Messy Correlation Matrix
+## Cluttered Correlation Matrix
+
+We created a correlation matrix to see what variables were positively and negatively impacting **WtpDollars (willingness to pay).** This correlation was extemely cluttered so we focused on variables that seemed to correlate with **WtpDollars.**
 
 ```{r}
 #| message: false
@@ -192,6 +263,12 @@ corrplot(CorMatrixAll, method = 'shade', addCoef.col = 'black', type = 'full', n
 
 ## Correlation Matrix Cleaned
 
+We used variables such as Y**ogaExperience, WillingnessToPay, SearchInterest, YogaContent, MandarinLang, VisitLikelihood,WtpDollars, MemberInterest, YogaFrequency,** and **PrefVideoShorts** in this correlation matrix.
+
+### Correlation Matrix Analysis
+
+1.  
+
 ```{r}
 #Narrow Down Correlation Matrix
 DataForCorAnalysis = CleanSurveyDataJoin |>
@@ -199,13 +276,6 @@ DataForCorAnalysis = CleanSurveyDataJoin |>
 
 CorMatrix = cor(DataForCorAnalysis, use= "pairwise.complete.obs")
 corrplot(CorMatrix, method = 'shade', addCoef.col = 'black', type = 'full', number.cex = 0.6, order = 'original', diag= FALSE)
-```
-
-```{r}
-#membership interest of people who answered all 4 survey questions
-#model_data <- CleanSurveyData|> #new data to use for predicitive analysis
-#  select(MembershipInterest,AgeGroup,Gender, YogaExperience) |> #filtering 4 survey #questions
-#str(model_data) #shows 50 obs of 4 variables
 ```
 
 ## Linear Regressions
