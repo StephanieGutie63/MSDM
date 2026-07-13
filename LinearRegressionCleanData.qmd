@@ -154,7 +154,7 @@ CorMatrixAll = cor(DataForCorAnalysisAll, use= "pairwise.complete.obs")
 corrplot(CorMatrixAll, method = 'shade', addCoef.col = 'black', type = 'full', number.cex = 0.6, order = 'original', diag= FALSE)
 ```
 
-## Correlation Matrix Cleaned 
+## Correlation Matrix Cleaned
 
 ```{r}
 #Narrow Down Correlation Matrix
@@ -172,7 +172,7 @@ corrplot(CorMatrix, method = 'shade', addCoef.col = 'black', type = 'full', numb
 #str(model_data) #shows 50 obs of 4 variables
 ```
 
-## Linear Regressions 
+## Linear Regressions
 
 ```{r}
 #Linear Regression 1
@@ -373,7 +373,7 @@ model_data3 %>%
 
 ### Cluster 1: Low Membership Potential
 
-#### Characteristics: 
+#### Characteristics:
 
 1.  Lowest willingness to pay\~\$2.31
 
@@ -383,13 +383,13 @@ model_data3 %>%
 
 4.  Highest yoga experience among the clusters \~2.76
 
-#### Marketing Strategy: 
+#### Marketing Strategy:
 
 These respondents appear experience yoga practitioners but are not very interested in a Sino Yoga membership. Focus on increase value of membership, explaining membership benefits, free educational content before promoting subsriptions
 
 ### Cluster2: High Yoga Frequency but Price Sensitive
 
-#### Characteristics: 
+#### Characteristics:
 
 1.  Practice yoga more frequently \~4.5
 
@@ -399,13 +399,13 @@ These respondents appear experience yoga practitioners but are not very interest
 
 4.  Lower yoga experience \~2.06
 
-#### Marketing Strategy: 
+#### Marketing Strategy:
 
 These respondents appear active but not convinced of the membership value. Focus on trial memberships, beginner friendly member content, and YouTube live reminders.
 
 ### Cluster3: High Value Audience
 
-#### Characteristics: 
+#### Characteristics:
 
 1.  Highest willingness to pay\~\$5.29
 
@@ -415,7 +415,7 @@ These respondents appear active but not convinced of the membership value. Focus
 
 4.  Regular yoga practitioners \~3.76
 
-#### Marketing Strategy: 
+#### Marketing Strategy:
 
 These respondents appear to be the ideal market customers. Focus on membership promotions, premium content, exclusive classes, community benefits, direct call to actions from YouTube to website.
 
@@ -424,7 +424,7 @@ table(k3$cluster)
 
 ```
 
-## Cluster Analysis 2 
+## Cluster Analysis 2
 
 Performing cluster analysis again as K=2 cluster because it makes it more reliable and easier to interpret.
 
@@ -474,7 +474,7 @@ table(k2$cluster)
 
 ### Cluster 1: Price Conscious Audience
 
-#### Characteristics: 
+#### Characteristics:
 
 1.  Lowest willingness to pay\~\$2.35
 
@@ -484,13 +484,13 @@ table(k2$cluster)
 
 4.  Highest yoga experience among the clusters \~2.67
 
-#### Marketing Strategy: 
+#### Marketing Strategy:
 
 These respondents appears to be interested in yoga but not convinced of the value of a membership. Focus on providing relevant free YouTube content, emphasize value of membership through testimonials, exclusive content. Use email and YouTube shorts to increase engagement before asking for membership purchases.
 
 ### Cluster2: High Value Membership Prospects
 
-#### Characteristics: 
+#### Characteristics:
 
 1.  Highest willingness to pay\~\$5.16
 
@@ -500,7 +500,7 @@ These respondents appears to be interested in yoga but not convinced of the valu
 
 4.  Regular yoga practitioners \~2.11
 
-#### Marketing Strategy: 
+#### Marketing Strategy:
 
 These respondents appears to be Sino Yoga's highest converting audience. Focus on promoting memberships, highlighting premium member benefits, direct viewers to website with strong call to actions, offer exclusive live classes and community access.
 
