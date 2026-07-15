@@ -326,7 +326,7 @@ summary(ModelSurvey6)
 #| message: false
 #| warning: false
 set.seed(123)
-ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+PracticeYogaInterest+YoutubeSocial, CleanSurveyDataJoin)
+ModelSurvey7= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+PracticeYogaInterest+YoutubeSocial, CleanSurveyDataJoin)
 
 summary(ModelSurvey7)
 #R-squared = 0.257
