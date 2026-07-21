@@ -36,7 +36,27 @@ Sino Yoga's primary growth objectives shape the analytical scope of this engagem
 
 ## Membership Monetization
 
-> (input about membership)\*\*
+> Sino Yoga’s monetization strategy focuses on converting engaged viewers into paying YouTube members through a single, accessible membership option priced at $4.99 per month. YouTube Memberships were selected because they allow viewers to subscribe directly through the platform they already use to discover and engage with Sino Yoga content, reducing the friction associated with directing users to an external purchasing platform.
+
+### Membership Benefits
+
+The proposed membership provides exclusive value through:
+
+- Exclusive member-only yoga classes
+- Live wellness sessions
+- Downloadable wellness resources
+- Early access to new content
+- Community-focused experiences
+
+### Pricing Support
+
+The **$4.99 monthly price** is supported by the survey findings, which showed:
+
+- **Average willingness to pay:** Approximately **$4.33**
+- **42.8%** of respondents selected either **$4.99** or **$5.99**
+
+These findings, combined with the predictive analysis, help identify the audience segments most likely to convert into paying members and support the development of targeted email, YouTube, and social media campaigns that effectively communicate the value of the membership.
+
 
 # Data Wrangling
 
