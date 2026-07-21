@@ -38,7 +38,7 @@ Sino Yoga's primary growth objectives shape the analytical scope of this engagem
 
 > (input about membership)\*\*
 
-# Data Wrangling 
+# Data Wrangling
 
 ## Data Collection
 
@@ -88,11 +88,11 @@ This data collected was downloaded on Qualtrics as a sav file using SPSS exporti
 
 6.  We saved this new dataset as **msdm_cleandata.csv** to use in Rstudio to clean, transform, wrangle , and visualzie in predictive analysis.
 
-# SPSS Descriptive Analysis 
+# SPSS Descriptive Analysis
 
 Thirty-five respondents selected one of the predefined price options, while 26 respondents provided open-ended responses. Because the open-ended responses were non-numeric and not directly comparable to the fixed pricing categories, they were excluded from the quantitative analysis.
 
-Although \$2.99 was the most frequently selected price point (34.3%), the mean willingness to pay was \$4.33, indicating that respondents were, on average, willing to pay more than the lowest pricing tier. Since the average respondent is willing to pay \$4.33, choosing **\$4.99** places the price close to the center of respondents' willingness to pay while increasing revenue per subscriber. About 42.8% of respondents selected either \$4.99 or \$5.99 suggesting that nearly half of the respondents were comfortable paying a premium membership price. \
+Although \$2.99 was the most frequently selected price point (34.3%), the mean willingness to pay was \$4.33, indicating that respondents were, on average, willing to pay more than the lowest pricing tier. Since the average respondent is willing to pay \$4.33, choosing **\$4.99** places the price close to the center of respondents' willingness to pay while increasing revenue per subscriber. About 42.8% of respondents selected either \$4.99 or \$5.99 suggesting that nearly half of the respondents were comfortable paying a premium membership price.\
 
 # R Predictive Analysis
 
@@ -292,15 +292,25 @@ library(rio)
 ModelSurvey= lm(WtpDollars ~ YogaFrequency, CleanSurveyDataJoin)
 
 summary(ModelSurvey)
-#shows r-squared 0. 
-#adjusted r-squared 0.125
-#significant overall 0.0479<5%
-#membershipinterest = 0.018
-#if age stays the same but membeship interest increases the willingess to pay increases by 0.48cents
-#people who are intersted in the membership will be wiling to pay more
-#focus on membeship content
+
 
 ```
+
+::: callout-tip
+## Interpretation
+
+-   R-squared 0.10 #Adjusted r-squared 0.08
+
+-   Overall model is significant (p= 0.030 \< 0.05)
+
+-   YogaFrequency = 0.882 (p = 0.030)
+
+-   If everything else stays the same, a 1 point increase in yoga frequency increases willingness to pay by about \$0.88
+
+-   People who practice yoga more frequently are willing to pay more
+
+-   Focus on encouraging consistent yoga practice through series, challenges and weekly classes
+:::
 
 ```{r}
 #Linear Regresssion 2
@@ -312,6 +322,22 @@ ModelSurvey2= lm(WtpDollars ~ VisitLikelihood, CleanSurveyDataJoin)
 summary(ModelSurvey2)
 ```
 
+::: callout-tip
+## Interpretation
+
+-   R-squared = 0.145
+
+-   Adjusted R-squared = 0.126
+
+-   Overall model is significant (p = 0.008 \< 0.05)
+
+-   VisitLikelihood = 1.187 (p = 0.008) #If everything else stays the same, a 1 point increase in visit likelihood increases willingness to pay by about \$1.19
+
+-   People who are more likely to visit Sino Yoga are willing to pay more
+
+-   Focus on driving website visits through YouTube CTAs, email, and community engagement
+:::
+
 ```{r}
 #Linear Regresssion 3
 #| message: false
@@ -321,6 +347,24 @@ ModelSurvey3= lm(WtpDollars ~ VisitLikelihood+YogaFrequency, CleanSurveyDataJoin
 
 summary(ModelSurvey3)
 ```
+
+::: callout-tip
+## Interpretation
+
+-   R-squared = 0.189
+
+-   Adjusted R-squared = 0.152
+
+-    Overall model is significant (p = 0.010 \< 0.05)
+
+-   VisitLikelihood remains significant
+
+-   YogaFrequency is no longer significant after controlling for visit likelihood
+
+-   People who are more engaged with Sino Yoga are willing to pay more than those who simply practice yoga frequently
+
+-   Focus on increasing engagement with the Sino Yoga brand and moving viewers toward memberships
+:::
 
 ```{r}
 #Linear Regresssion 4
@@ -332,6 +376,26 @@ ModelSurvey4= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang, CleanS
 summary(ModelSurvey4)
 ```
 
+::: callout-tip
+## Interpretation
+
+-   R-squared = 0.236
+
+-   Adjusted R-squared = 0.161
+
+-   Overall model is significant (p = 0.024 \< 0.05)
+
+-   AgeGroup = -1.853 (p = 0.018)
+
+-   YogaFrequency = 1.054 (p = 0.012)
+
+-   MandarinLang is marginally significant (p = 0.085)
+
+-   Younger respondents and more frequent yoga practitioners are willing to pay more
+
+-   Continue bilingual content and encourage regular yoga practice
+:::
+
 ```{r}
 #Linear Regresssion 5
 #| message: false
@@ -341,6 +405,24 @@ ModelSurvey5= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Country
 
 summary(ModelSurvey5)
 ```
+
+::: callout-tip
+## Interpretation
+
+-   R-squared = 0.329
+
+-   Adjusted R-squared = 0.203
+
+-   Overall model is significant (p = 0.035 \< 0.05)
+
+-   MandarinLang = 2.086 (p = 0.010)
+
+-   Country is not significant
+
+-   Mandarin-speaking respondents are willing to pay about \$2.09 more than non-Mandarin speakers Language matters more than country
+
+-   Continue investing in bilingual English and Traditional Chinese content
+:::
 
 ```{r}
 #Linear Regresssion 5
@@ -352,6 +434,26 @@ ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Practic
 summary(ModelSurvey6)
 ```
 
+::: callout-tip
+## Interpretation
+
+-   R-squared = 0.246
+
+-   Adjusted R-squared = 0.151
+
+-   Overall model is significant (p = 0.039 \< 0.05)
+
+-   AgeGroup = -1.847 (p = 0.019) #YogaFrequency = 1.152 (p = 0.010)
+
+-   PracticeYogaInterest is not significant (p = 0.468)
+
+-   Simply being interested in yoga does not increase willingness to pay
+
+-   People who actually practice yoga more frequently are willing to pay more
+
+-   Focus on building consistent practice habits instead of only generating interest
+:::
+
 ```{r}
 #Linear Regresssion 5
 #| message: false
@@ -361,6 +463,24 @@ ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Practic
 
 summary(ModelSurvey6)
 ```
+
+::: callout-note
+## Interpretation
+
+-   R-squared = 0.257
+
+-   Adjusted R-squared = 0.133
+
+-   Overall model is NOT significant (p = 0.081 \> 0.05)
+
+-   YoutubeSocial is not significant (p = 0.544)
+
+-   AgeGroup and YogaFrequency remain significant
+
+-   Finding Sino Yoga through YouTube/social media alone does not increase willingness to pay
+
+-   Focus on retaining viewers and converting them into active community members rather than only acquiring new viewers
+:::
 
 ## Random Forest (Failed)
 
