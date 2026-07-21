@@ -17,7 +17,7 @@ execute:
 
 # Client Overview
 
-Sino Yoga is a cross-cultural yoga and wellness brand founded by Yang Qi, integrating Traditional Chinese Medicine with yoga practice through her signature Five-Element Meridian Yoga method. The brand is expanding from China into the U.S. market and uses YouTube (@Sinoyoga) as its primary discovery channel, with the long-term goal of monetizing its audience through tiered, subscription-based yoga memberships. Sino Yoga maintains a multi-platform digital presence across YouTube, WeChat, a newly launched Facebook page, and the [Sino Yoga website](https://sinoyoga.org/en-us).
+Sino Yoga is a cross-cultural yoga and wellness brand founded by Yang Qi, integrating Traditional Chinese Medicine with yoga practice through her signature Five-Element Meridian Yoga method. The brand is expanding from China into the U.S. market and uses YouTube (@Sinoyoga) as its primary discovery channel, Sino Yoga's long-term objective is to build a sustainable recurring revenue model through a YouTube membership program while strengthening customer engagement and brand loyalty. Sino Yoga maintains a multi-platform digital presence across YouTube, WeChat, a newly launched Facebook page, and the [Sino Yoga website](https://sinoyoga.org/en-us).
 
 ## Business Objectives
 
