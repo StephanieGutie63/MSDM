@@ -36,27 +36,26 @@ Sino Yoga has a lack of a structured, data driven digital growth strategy that l
 
 ## Membership Monetization
 
-Sino Yoga’s monetization strategy focuses on converting engaged viewers into paying YouTube members through a single, accessible membership option priced at $4.99 per month. YouTube Memberships were selected because they allow viewers to subscribe directly through the platform they already use to discover and engage with Sino Yoga content, reducing the friction associated with directing users to an external purchasing platform.
+Sino Yoga’s monetization strategy focuses on converting engaged viewers into paying YouTube members through a single, accessible membership option priced at \$4.99 per month. YouTube Memberships were selected because they allow viewers to subscribe directly through the platform they already use to discover and engage with Sino Yoga content, reducing the friction associated with directing users to an external purchasing platform.
 
 ### Membership Benefits
 
 The proposed membership provides exclusive value through:
 
-- Exclusive member-only yoga classes
-- Live wellness sessions
-- Downloadable wellness resources
-- Early access to new content
-- Community-focused experiences
+-   Exclusive member-only yoga classes
+-   Live wellness sessions
+-   Downloadable wellness resources
+-   Early access to new content
+-   Community-focused experiences
 
 ### Pricing Support
 
-The **$4.99 monthly price** is supported by the survey findings, which showed:
+The **\$4.99 monthly price** is supported by the survey findings, which showed:
 
-- **Average willingness to pay:** Approximately **$4.33**
-- **42.8%** of respondents selected either **$4.99** or **$5.99**
+-   **Average willingness to pay:** Approximately **\$4.33**
+-   **42.8%** of respondents selected either **\$4.99** or **\$5.99**
 
 These findings, combined with the predictive analysis, help identify the audience segments most likely to convert into paying members and support the development of targeted email, YouTube, and social media campaigns that effectively communicate the value of the membership.
-
 
 # Data Wrangling
 
@@ -107,6 +106,8 @@ This data collected was downloaded on Qualtrics as a sav file using SPSS exporti
 ![](images/clipboard-1271299785.png){fig-align="center" width="335"}
 
 6.  We saved this new dataset as **msdm_cleandata.csv** to use in Rstudio to clean, transform, wrangle , and visualize in predictive analysis.
+
+![](images/clipboard-805213427.png){fig-align="center" width="496"}
 
 # SPSS Descriptive Analysis
 
@@ -261,6 +262,100 @@ CleanSurveyDataJoin<- CleanSurveyData |>
   )
 
 head(CleanSurveyDataJoin$WtpDollars,10)
+```
+
+## Plot Willingness to Pay
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+
+mean_wtp <- mean(CleanSurveyData$WtpDollars, na.rm = TRUE)
+
+ggplot(CleanSurveyData, aes(WtpDollars)) +
+  geom_histogram(
+    binwidth = 0.5,
+    fill = "#2563EB",
+    color = "white",
+    linewidth = 0.7
+  ) +
+  geom_vline(
+    xintercept = mean_wtp,
+    color = "#EF4444",
+    linewidth = 1.5,
+    linetype = "dashed"
+  ) +
+  annotate(
+    "label",
+    x = mean_wtp + .05,
+    y = 11,
+    label = paste0("Mean: $", round(mean_wtp,2)),
+    fill = "#EF4444",
+    color = "white",
+    fontface = "bold",
+    label.size = 0
+  ) +
+  scale_x_continuous(
+    breaks = c(2.99,3.99,4.99,5.99),
+    labels = c("$2.99","$3.99","$4.99","$5.99")
+  ) +
+  labs(
+    title = "Distribution of Monthly Willingness to Pay",
+    subtitle = "Sino Yoga Survey (n = 35)",
+    x = "Membership Price",
+    y = "Respondents"
+  ) +
+  theme_few(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 22),
+    plot.subtitle = element_text(color = "grey40"),
+    axis.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
+```{r}
+stats <- data.frame(
+  Measure = c("Mean", "Median"),
+  Value = c(
+    mean(CleanSurveyData$WtpDollars, na.rm = TRUE),
+    median(CleanSurveyData$WtpDollars, na.rm = TRUE)
+  )
+)
+
+ggplot(stats, aes(x = Measure, y = Value, fill = Measure)) +
+  geom_col(width = 0.55, show.legend = FALSE) +
+  geom_text(
+    aes(label = paste0("$", sprintf("%.2f", Value))),
+    vjust = -0.5,
+    size = 5,
+    fontface = "bold",
+    color = "black"
+  ) +
+  scale_fill_manual(values = c("#2D7FF9", "#6CC3D5")) +
+  scale_y_continuous(
+    limits = c(0, 6),
+    breaks = seq(0, 6, 1),
+    expand = expansion(mult = c(0, 0.05))
+  ) +
+  labs(
+    title = "Monthly Willingness to Pay",
+    subtitle = "Comparison of Mean and Median Membership Price",
+    x = NULL,
+    y = "Monthly Price (USD)"
+  ) +
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(face = "bold", size = 20, hjust = 0.5),
+    plot.subtitle = element_text(size = 13, color = "gray40", hjust = 0.5),
+    axis.title.y = element_text(face = "bold"),
+    axis.text = element_text(size = 13),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(color = "#E6E6E6"),
+    plot.background = element_rect(fill = "white", color = NA)
+  )
 ```
 
 ## Cluttered Correlation Matrix
