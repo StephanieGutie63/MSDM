@@ -86,7 +86,7 @@ This data collected was downloaded on Qualtrics as a sav file using SPSS exporti
 
 ![](images/clipboard-1271299785.png){fig-align="center" width="335"}
 
-6.  We saved this new dataset as **msdm_cleandata.csv** to use in Rstudio to clean, transform, wrangle , and visualzie in predictive analysis.
+6.  We saved this new dataset as **msdm_cleandata.csv** to use in Rstudio to clean, transform, wrangle , and visualize in predictive analysis.
 
 # SPSS Descriptive Analysis
 
@@ -126,7 +126,7 @@ head(msdm_data,3)
 
 ## Clean_name and Date
 
-We cleaned the dataset **msdm_data** by upper_camel the varaibale names and also removing any spaces and special characters. Afterwards we renamed that dataset as **SurveyData** to keep seperate. We changed the **RecordedDate** variable to Date format and checked to make sure it was changed.
+We cleaned the dataset **msdm_data** by upper_camel the varaiable names and also removing any spaces and special characters. Afterwards we renamed that dataset as **SurveyData** to keep separate. We changed the **RecordedDate** variable to Date format and checked to make sure it was changed.
 
 ```{r}
 #Clean Variable Names
@@ -245,7 +245,7 @@ head(CleanSurveyDataJoin$WtpDollars,10)
 
 ## Cluttered Correlation Matrix
 
-We created a correlation matrix to see what variables were positively and negatively impacting **WtpDollars (willingness to pay).** This correlation was extemely cluttered so we focused on variables that seemed to correlate with **WtpDollars.**
+We created a correlation matrix to see what variables were positively and negatively impacting **WtpDollars (willingness to pay).** This correlation was extremely cluttered so we focused on variables that seemed to correlate with **WtpDollars.**
 
 ```{r}
 #| message: false
@@ -280,11 +280,12 @@ corrplot(CorMatrix, method = 'shade', addCoef.col = 'black', type = 'full', numb
 
 ## Linear Regressions
 
+### Linear Regression 1
+
 ```{r}
-#Linear Regression 1
 #| message: false
 #| warning: false
-#Linear Regresssion
+#Linear Regression
 set.seed(123)
 #library(tidymodels)
 library(rio)
@@ -297,7 +298,7 @@ summary(ModelSurvey)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared 0.10 #Adjusted r-squared 0.08
 
@@ -310,10 +311,15 @@ summary(ModelSurvey)
 -   People who practice yoga more frequently are willing to pay more
 
 -   Focus on encouraging consistent yoga practice through series, challenges and weekly classes
+
+------------------------------------------------------------------------
+
+**Impact:** Yoga frequency nudges willingness to pay (\~\$0.88 per point) but explains only \~10% of it on its own, so it supports engagement tactics rather than serving as a basis for pricing\
 :::
 
+### Linear Regression 2
+
 ```{r}
-#Linear Regresssion 2
 #| message: false
 #| warning: false
 set.seed(123)
@@ -323,7 +329,7 @@ summary(ModelSurvey2)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared = 0.145
 
@@ -336,10 +342,15 @@ summary(ModelSurvey2)
 -   People who are more likely to visit Sino Yoga are willing to pay more
 
 -   Focus on driving website visits through YouTube CTAs, email, and community engagement
+
+------------------------------------------------------------------------
+
+**Impact:** Visit likelihood is the higher-leverage driver — \$1.19 per point versus \$0.88 for frequency — so moving viewers to the website returns more per point than getting them to practice more
 :::
 
+### Linear Regression 3
+
 ```{r}
-#Linear Regresssion 3
 #| message: false
 #| warning: false
 set.seed(123)
@@ -349,13 +360,13 @@ summary(ModelSurvey3)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared = 0.189
 
 -   Adjusted R-squared = 0.152
 
--    Overall model is significant (p = 0.010 \< 0.05)
+-   Overall model is significant (p = 0.010 \< 0.05)
 
 -   VisitLikelihood remains significant
 
@@ -364,10 +375,15 @@ summary(ModelSurvey3)
 -   People who are more engaged with Sino Yoga are willing to pay more than those who simply practice yoga frequently
 
 -   Focus on increasing engagement with the Sino Yoga brand and moving viewers toward memberships
+
+------------------------------------------------------------------------
+
+**Impact:** With both predictors in the model, engagement absorbs the effect and frequency drops out — the revenue lever is brand engagement, not practice volume, so spend should go toward converting engaged viewers rather than encouraging more practice
 :::
 
+### Linear Regression 4
+
 ```{r}
-#Linear Regresssion 4
 #| message: false
 #| warning: false
 set.seed(123)
@@ -377,7 +393,7 @@ summary(ModelSurvey4)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared = 0.236
 
@@ -394,10 +410,15 @@ summary(ModelSurvey4)
 -   Younger respondents and more frequent yoga practitioners are willing to pay more
 
 -   Continue bilingual content and encourage regular yoga practice
+
+------------------------------------------------------------------------
+
+**Impact:** Age and practice frequency together explain more of willingness to pay than either alone, so the highest-value segment to target is younger, frequent practitioners — with bilingual content as a secondary lift
 :::
 
+### Linear Regression 5
+
 ```{r}
-#Linear Regresssion 5
 #| message: false
 #| warning: false
 set.seed(123)
@@ -407,7 +428,7 @@ summary(ModelSurvey5)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared = 0.329
 
@@ -422,10 +443,15 @@ summary(ModelSurvey5)
 -   Mandarin-speaking respondents are willing to pay about \$2.09 more than non-Mandarin speakers Language matters more than country
 
 -   Continue investing in bilingual English and Traditional Chinese content
+
+------------------------------------------------------------------------
+
+**Impact:** Language, not country, is what moves willingness to pay — Mandarin speakers pay about \$2.09 more, so investment in bilingual (English + Traditional Chinese) content targets the difference directly, where geographic targeting would not
 :::
 
+### Linear Regression 6
+
 ```{r}
-#Linear Regresssion 5
 #| message: false
 #| warning: false
 set.seed(123)
@@ -435,7 +461,7 @@ summary(ModelSurvey6)
 ```
 
 ::: callout-tip
-## Interpretation
+Interpretation
 
 -   R-squared = 0.246
 
@@ -452,10 +478,15 @@ summary(ModelSurvey6)
 -   People who actually practice yoga more frequently are willing to pay more
 
 -   Focus on building consistent practice habits instead of only generating interest
+
+------------------------------------------------------------------------
+
+**Impact:** Stated interest adds nothing to willingness to pay once behavior is accounted for, so marketing spend aimed at generating interest is unlikely to raise revenue — converting interest into actual practice is what pays off
 :::
 
+### Linear Regression 7
+
 ```{r}
-#Linear Regresssion 5
 #| message: false
 #| warning: false
 set.seed(123)
@@ -465,7 +496,7 @@ summary(ModelSurvey6)
 ```
 
 ::: callout-note
-## Interpretation
+Interpretation
 
 -   R-squared = 0.257
 
@@ -480,6 +511,10 @@ summary(ModelSurvey6)
 -   Finding Sino Yoga through YouTube/social media alone does not increase willingness to pay
 
 -   Focus on retaining viewers and converting them into active community members rather than only acquiring new viewers
+
+------------------------------------------------------------------------
+
+**Impact:** Adding the YouTube/social discovery variable makes the whole model non-significant and contributes nothing itself, so acquisition channel does not predict willingness to pay — budget is better spent retaining and converting existing viewers than on reaching new ones
 :::
 
 ## Random Forest (Failed)
@@ -582,7 +617,7 @@ Noticeable bend around K=3, or K=4
 
 ### Cluster Plot
 
-Cluseter shows respondents naturally seperate into 3 groups.
+Cluster shows respondents naturally separate into 3 groups.
 
 1.  Cluster (Red): Right side
 
@@ -611,7 +646,7 @@ model_data3 %>%
 
 #### Marketing Strategy:
 
-These respondents appear experience yoga practitioners but are not very interested in a Sino Yoga membership. Focus on increase value of membership, explaining membership benefits, free educational content before promoting subsriptions
+These respondents appear experience yoga practitioners but are not very interested in a Sino Yoga membership. Focus on increase value of membership, explaining membership benefits, free educational content before promoting subscriptions
 
 ### Cluster2: High Yoga Frequency but Price Sensitive
 
