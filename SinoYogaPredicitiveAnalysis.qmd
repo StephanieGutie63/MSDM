@@ -32,11 +32,11 @@ Sino Yoga's primary growth objectives shape the analytical scope of this engagem
 
 # Business Problem
 
-> Sino Yoga has a lack of a structured, data driven digital growth strategy that limits visibility, engagement, and revenue. The brand needs to enhance brand visibility, increase audience engagement, and develop sustainable membership monetization, while addressing multi-channel integration challenges that support long-term growth.
+Sino Yoga has a lack of a structured, data driven digital growth strategy that limits visibility, engagement, and revenue. The brand needs to enhance brand visibility, increase audience engagement, and develop sustainable membership monetization, while addressing multi-channel integration challenges that support long-term growth.
 
 ## Membership Monetization
 
-> Sino Yoga’s monetization strategy focuses on converting engaged viewers into paying YouTube members through a single, accessible membership option priced at $4.99 per month. YouTube Memberships were selected because they allow viewers to subscribe directly through the platform they already use to discover and engage with Sino Yoga content, reducing the friction associated with directing users to an external purchasing platform.
+Sino Yoga’s monetization strategy focuses on converting engaged viewers into paying YouTube members through a single, accessible membership option priced at $4.99 per month. YouTube Memberships were selected because they allow viewers to subscribe directly through the platform they already use to discover and engage with Sino Yoga content, reducing the friction associated with directing users to an external purchasing platform.
 
 ### Membership Benefits
 
@@ -515,7 +515,7 @@ ModelSurvey6= lm(WtpDollars ~ AgeGroup+Gender+YogaFrequency+MandarinLang+Practic
 summary(ModelSurvey6)
 ```
 
-::: callout-note
+::: callout-tip
 Interpretation
 
 -   R-squared = 0.257
